@@ -1,4 +1,4 @@
-package com.timo.Cinelab.Cinelab.models;
+package com.timo.Cinelab.Cinelab.models.movie;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ public class Movie {
     private Boolean adult;
     private String backdrop_path;
     private List<Integer> genre_ids;
-    private Integer id;
+    private Long id;
     private String original_language;
     private String original_title;
     private String overview;

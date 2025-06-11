@@ -4,7 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.timo.Cinelab.Cinelab.models.Movie;
+import com.timo.Cinelab.Cinelab.models.movie.Movie;
+import com.timo.Cinelab.Cinelab.models.movie.MovieLarge;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,6 +20,7 @@ public class MovieApi {
     private static final String MOVIES_PAGE_URL = "https://api.themoviedb.org/3/discover/movie?page=";
     private static final String MOVIES_BY_TITLE_URL = "https://api.themoviedb.org/3/search/movie?api_key=YOUR_API_KEY&query=";
     private static final String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular";
+    private static final String MOVIE_BY_ID_URL = "https://api.themoviedb.org/3/movie/";
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
@@ -103,8 +105,28 @@ public class MovieApi {
 
     }
 
-    public static void main(String[] args){
+    public MovieLarge getMovieById(long id) {
+        try {
+            String finalUrl = MOVIE_BY_ID_URL + id;
+
+            HttpEntity<String> httpEntity = new HttpEntity<>(getHttpHeaders());
+
+            String response = restTemplate.exchange(
+                    finalUrl,
+                    HttpMethod.GET,
+                    httpEntity,
+                    String.class
+            ).getBody();
+
+            return objectMapper.readValue(response, MovieLarge.class);
+        } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
         MovieApi movieApi = new MovieApi();
-        movieApi.getPopularMovies().forEach(m -> System.out.println(m + " " + m.getOverview()));
+        System.out.println(movieApi.getMovieById(157336));
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movies</title>
+    <title th:text="${movie.getTitle()}"></title>
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/general_style.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,20 +26,7 @@
         </form>
     </header>
     <main id="main">
-        <div class="container">
-            <ul class="movies-list">
-                <li th:each="movie : ${moviesList}" class="movie">
-                    <a th:href="@{/movies/{id}(id=${movie.getId()})}" class="movie-link">
-                        <div class="poster-div">
-                            <img th:src="@{${movie.getMoviePosterUrl()}}" alt="Movie poster" class="movie-poster">
-                        </div>
-                        <span th:text="${movie.getTitle()}" class="movie-title"></span>
-                        <span th:text="${movie.getRelease_date()}" class="movie-release-date"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+
     </main>
-    <script th:src="@{/scripts/justifyTitleScript.js}"></script>
 </body>
 </html>
