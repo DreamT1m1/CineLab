@@ -13,6 +13,7 @@ body {
 #header {
     display: flex;
     position: fixed;
+    z-index: 9999;
     width: 100%;
     align-items: center;
     height: 60px;
