@@ -8,10 +8,12 @@ import com.timo.Cinelab.Cinelab.models.Movie;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@Component
 public class MovieApi {
 
     private static final String MOVIES_PAGE_URL = "https://api.themoviedb.org/3/discover/movie?page=";
@@ -50,6 +52,7 @@ public class MovieApi {
                     new TypeReference<>() {}
             );
         } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
             return List.of();
         }
     }
@@ -72,12 +75,13 @@ public class MovieApi {
                     new TypeReference<>() {}
             );
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+            return List.of();
         }
     }
 
     public static void main(String[] args){
         MovieApi movieApi = new MovieApi();
-        movieApi.getMoviesByTitle("Spider-Man").forEach(System.out::println);
+        movieApi.getMoviesByTitle("Batman").forEach(m -> System.out.println(m + " " + m.getOverview()));
     }
 }

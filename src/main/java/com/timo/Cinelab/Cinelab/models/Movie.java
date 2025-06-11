@@ -35,4 +35,8 @@ public class Movie {
                 ", release_date='" + release_date + '\'' +
                 '}';
     }
+
+    public String getMoviePosterUrl() {
+        return "https://image.tmdb.org/t/p/w500" + poster_path;
+    }
 }

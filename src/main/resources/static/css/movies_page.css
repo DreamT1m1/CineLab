@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    background-color: #17171a;
+    border: 1px solid #4e4e50;
+}
+
+#logo-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+#logo {
+    margin-right: 200px;
+    font-family: "Lexend Exa", serif;
+}
+
+#search-input-form {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#search-input-form > label {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#search-input {
+    border: 1px solid #950740;
+    border-radius: 5px;
+    width: 500px;
+    height: 50%;
+}
+
+.movies-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.movie {
+    display: flex;
+    box-sizing: border-box;
+    padding: 15px 15px;
+    border: 1px solid #950740;
+    border-radius: 5px;
+    width: calc((100% - 40px) / 3);
+}
+
+.poster-div {
+    margin-right: 20px;
+}
+
+.movie-poster {
+    width: 200px;
+}
+
+.movie-description {
+}
+
+.movie-title {
+    display: block;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.movie-description > span {
+    display: block;
+}
+
+.movie-release-date {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
