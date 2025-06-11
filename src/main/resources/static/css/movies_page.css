@@ -3,6 +3,11 @@ body {
     color: white;
 }
 
+#main {
+    display: flex;
+    justify-content: center;
+}
+
 #header {
     display: flex;
     align-items: center;
@@ -41,8 +46,13 @@ body {
     height: 50%;
 }
 
+.container {
+    width: 70%;
+}
+
 .movies-list {
     display: flex;
+    justify-content: space-evenly;
     gap: 20px;
     flex-wrap: wrap;
     list-style: none;
@@ -51,10 +61,15 @@ body {
 .movie {
     display: flex;
     box-sizing: border-box;
+    align-items: center;
     padding: 15px 15px;
     border: 1px solid #950740;
     border-radius: 5px;
-    width: calc((100% - 40px) / 3);
+    width: 30%;
+}
+
+.movie:hover {
+    box-shadow: 10px 0 rgba(149, 7, 64, 0.5);
 }
 
 .poster-div {

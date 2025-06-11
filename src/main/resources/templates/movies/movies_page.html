@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Movies</title>
-    <link rel="stylesheet" th:href="@{/css/movies_page.css}">
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/general_style.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/movies_page.css}">
 </head>
 <body>
     <header id="header">
@@ -25,19 +25,20 @@
             </label>
         </form>
     </header>
-    <main>
-        <ul class="movies-list">
-            <li th:each="movie : ${moviesList}" class="movie">
-                <div class="poster-div">
-                    <img th:src="@{${movie.getMoviePosterUrl()}}" alt="Movie poster" class="movie-poster">
-                </div>
-                <div class="movie-description">
-                    <span th:text="${movie.getTitle()}" class="movie-title"></span>
-                    <span th:text="${movie.getRelease_date()}" class="movie-release-date"></span>
-                    <span th:text="${movie.getOverview()}" class="movie-overview"></span>
-                </div>
-            </li>
-        </ul>
+    <main id="main">
+        <div class="container">
+            <ul class="movies-list">
+                <li th:each="movie : ${moviesList}" class="movie">
+                    <div class="poster-div">
+                        <img th:src="@{${movie.getMoviePosterUrl()}}" alt="Movie poster" class="movie-poster">
+                    </div>
+                    <div class="movie-description">
+                        <span th:text="${movie.getTitle()}" class="movie-title"></span>
+                        <span th:text="${movie.getRelease_date()}" class="movie-release-date"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </main>
 </body>
 </html>
