@@ -32,13 +32,13 @@
                     <div class="poster-div">
                         <img th:src="@{${movie.getMoviePosterUrl()}}" alt="Movie poster" class="movie-poster">
                     </div>
-                    <div class="movie-description">
-                        <span th:text="${movie.getTitle()}" class="movie-title"></span>
-                        <span th:text="${movie.getRelease_date()}" class="movie-release-date"></span>
-                    </div>
+                    <span th:text="${movie.getTitle()}" class="movie-title"></span>
+                    <span th:text="${movie.getRelease_date()}" class="movie-release-date"></span>
                 </li>
             </ul>
         </div>
     </main>
+    <script th:src="@{/scripts/overflowScrollScript.js}"></script>
+    <script th:src="@{/scripts/justifyTitleScript.js}"></script>
 </body>
 </html>

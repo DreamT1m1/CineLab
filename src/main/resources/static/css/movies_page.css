@@ -1,20 +1,27 @@
 body {
     font-family: Arial, sans-serif;
     color: white;
+    background: linear-gradient(to bottom, #1a1a1d, #381c25);
 }
 
 #main {
     display: flex;
     justify-content: center;
+    padding-top: 100px;
 }
 
 #header {
     display: flex;
+    position: fixed;
+    width: 100%;
     align-items: center;
     height: 60px;
     padding: 10px;
     background-color: #17171a;
     border: 1px solid #4e4e50;
+    border-top: none;
+    border-left: none;
+    border-right: none;
 }
 
 #logo-link {
@@ -59,41 +66,56 @@ body {
 }
 
 .movie {
-    display: flex;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 200px;
     padding: 15px 15px;
     border: 1px solid #950740;
     border-radius: 5px;
-    width: 30%;
 }
 
 .movie:hover {
-    box-shadow: 10px 0 rgba(149, 7, 64, 0.5);
-}
-
-.poster-div {
-    margin-right: 20px;
+    box-shadow: 5px 5px rgba(149, 7, 64, 0.7);
 }
 
 .movie-poster {
-    width: 200px;
-}
-
-.movie-description {
+    width: 160px;
 }
 
 .movie-title {
     display: block;
+    width: 100%;
     font-weight: 600;
     font-size: 24px;
-}
-
-.movie-description > span {
-    display: block;
+    margin-top: auto;
 }
 
 .movie-release-date {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.movie-title-fits {
+    width: auto;
+    text-overflow: clip;
+    justify-self: center;
+}
+
+.movie-title-does-not-fit {
+    display: inline-block;
+    animation: scroll-left 8s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }

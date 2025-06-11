@@ -18,6 +18,7 @@ public class MovieApi {
 
     private static final String MOVIES_PAGE_URL = "https://api.themoviedb.org/3/discover/movie?page=";
     private static final String MOVIES_BY_TITLE_URL = "https://api.themoviedb.org/3/search/movie?api_key=YOUR_API_KEY&query=";
+    private static final String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular";
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
@@ -80,8 +81,30 @@ public class MovieApi {
         }
     }
 
+    public List<Movie> getPopularMovies() {
+        try {
+            HttpEntity<String> httpEntity = new HttpEntity<>(getHttpHeaders());
+
+            String response = restTemplate.exchange(
+                    POPULAR_MOVIES_URL,
+                    HttpMethod.GET,
+                    httpEntity,
+                    String.class
+            ).getBody();
+
+            return objectMapper.convertValue(
+                    objectMapper.readTree(response).get("results"),
+                    new TypeReference<>() {}
+            );
+        } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
+            return List.of();
+        }
+
+    }
+
     public static void main(String[] args){
         MovieApi movieApi = new MovieApi();
-        movieApi.getMoviesByTitle("Batman").forEach(m -> System.out.println(m + " " + m.getOverview()));
+        movieApi.getPopularMovies().forEach(m -> System.out.println(m + " " + m.getOverview()));
     }
 }
