@@ -1,3 +1,15 @@
 body {
-    background-color: #1A1A1D;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(to bottom, #1a1a1d, #381c25);
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.container {
+    width: 70%;
 }

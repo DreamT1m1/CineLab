@@ -9,9 +9,11 @@ import java.util.List;
 @Setter
 public class MovieLarge {
 
+    private static final String IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
     private Boolean adult;
     private String backdrop_path;
-    private String belongs_to_collection;
+    private MovieCollection belongs_to_collection;
     private Integer budget;
     private List<Genre> genres;
     private String homepage;
@@ -44,5 +46,13 @@ public class MovieLarge {
         return "MovieLarge{" +
                 "original_title='" + original_title + '\'' +
                 '}';
+    }
+
+    public String getRuntimeInHoursAndMinutes() {
+        return String.format("%dh %dm", getRuntime() / 60, getRuntime() % 60);
+    }
+
+    public String getMoviePosterUrl() {
+        return IMAGE_URL + poster_path;
     }
 }

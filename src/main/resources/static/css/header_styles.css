@@ -1,0 +1,55 @@
+#header {
+    display: flex;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    background-color: #17171a;
+    border: 1px solid #4e4e50;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+#header-container {
+    width: 70%;
+    padding-left: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#logo-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+#logo {
+    margin-right: 188px;
+    font-family: "Lexend Exa", serif;
+}
+
+#search-input-form {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#search-input-form > label {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#search-input {
+    width: 500px;
+    height: 50%;
+    border: 0;
+    border-bottom: 2px solid #950740;
+    outline: 0;
+    font-size: 1.3rem;
+    color: white;
+    padding: 7px 0;
+    background: transparent;
+}

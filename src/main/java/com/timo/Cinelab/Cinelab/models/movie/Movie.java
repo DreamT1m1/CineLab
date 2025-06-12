@@ -9,6 +9,8 @@ import java.util.List;
 @Setter
 public class Movie {
 
+    private static final String IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
     private Boolean adult;
     private String backdrop_path;
     private List<Integer> genre_ids;
@@ -37,6 +39,6 @@ public class Movie {
     }
 
     public String getMoviePosterUrl() {
-        return "https://image.tmdb.org/t/p/w500" + poster_path;
+        return IMAGE_URL + poster_path;
     }
 }

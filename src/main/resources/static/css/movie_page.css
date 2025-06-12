@@ -1,0 +1,48 @@
+#meta-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    border: 2px solid white;
+}
+
+#main-info {
+
+}
+
+#original-title {
+    display: block;
+}
+
+#original-title {
+    margin-bottom: 10px;
+}
+
+#secondary-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+#release-date {
+    display: block;
+}
+
+#runtime {
+    display: block;
+}
+
+#media {
+    height: 400px;
+    border: 2px solid white;
+}
+
+.image {
+    display: inline-block;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.image:hover {
+    filter: brightness(80%);
+}

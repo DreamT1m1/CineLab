@@ -3,9 +3,12 @@ package com.timo.Cinelab.Cinelab.movieapi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.timo.Cinelab.Cinelab.models.movie.BackDrop;
 import com.timo.Cinelab.Cinelab.models.movie.Movie;
 import com.timo.Cinelab.Cinelab.models.movie.MovieLarge;
+import com.timo.Cinelab.Cinelab.models.movie.Video;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -105,7 +108,7 @@ public class MovieApi {
 
     }
 
-    public MovieLarge getMovieById(long id) {
+    public MovieLarge getMovieLargeById(long id) {
         try {
             String finalUrl = MOVIE_BY_ID_URL + id;
 
@@ -125,8 +128,61 @@ public class MovieApi {
         }
     }
 
+    public List<BackDrop> getMovieBackDrops(long id) {
+            try {
+                String finalUrl = MOVIE_BY_ID_URL + id + "/images";
+
+                HttpEntity<String> httpEntity = new HttpEntity<>(getHttpHeaders());
+
+                JsonNode response = objectMapper.readTree(restTemplate.exchange(
+                        finalUrl,
+                        HttpMethod.GET,
+                        httpEntity,
+                        String.class
+                ).getBody()).path("backdrops");
+
+                return objectMapper.readValue(
+                        response.toString(),
+                        new TypeReference<>() {}
+                );
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+    }
+
+    public List<Video> getMovieVideos(long id) {
+        try {
+            String finalUrl = MOVIE_BY_ID_URL + id + "/videos";
+
+            HttpEntity<String> httpEntity = new HttpEntity<>(getHttpHeaders());
+
+            JsonNode response = objectMapper.readTree(restTemplate.exchange(
+                    finalUrl,
+                    HttpMethod.GET,
+                    httpEntity,
+                    String.class
+            ).getBody()).path("results");
+
+            return objectMapper.readValue(
+                    response.toString(),
+                    new TypeReference<>() {}
+            );
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getMovieTrailerUrl(long id) {
+        return getMovieVideos(id)
+                .stream()
+                .filter(v -> v.getType().equalsIgnoreCase("trailer"))
+                .findFirst()
+                .get()
+                .getFullLink();
+    }
+
     public static void main(String[] args) {
         MovieApi movieApi = new MovieApi();
-        System.out.println(movieApi.getMovieById(157336));
+        System.out.println(movieApi.getMovieTrailerUrl(870028));
     }
 }
