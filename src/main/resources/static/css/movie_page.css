@@ -3,8 +3,6 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-
-    border: 2px solid white;
 }
 
 #main-info {
@@ -34,15 +32,25 @@
 
 #media {
     height: 400px;
-    border: 2px solid white;
+    display: flex;
+    align-items: center;
 }
 
 .image {
-    display: inline-block;
+    display: block;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin-left: 10px;
 }
 
 .image:hover {
     filter: brightness(80%);
+}
+
+#trailer {
+    display: block;
+    width: 40%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
 }

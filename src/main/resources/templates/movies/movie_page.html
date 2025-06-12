@@ -20,7 +20,7 @@
                     <h1 th:text="${movie.getTitle()}" id="main-title"></h1>
                     <span th:text="${movie.getOriginal_title()}" id="original-title"></span>
                     <div id="secondary-info">
-                        <span th:text="${movie.getRelease_date().substring(0, 4)}" id="release-date"></span>
+                        <span th:text="${movie.getRelease_date()}" id="release-date"></span>
                         <span th:text="${movie.getRuntimeInHoursAndMinutes()}" id="runtime"></span>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
             </div>
             <div id="media">
                 <img th:src="@{${movie.getMoviePosterUrl()}}" alt="Main poster" class="image">
-                <iframe th:src="@{${trailer}}" id="trailer" title="YouTube Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe th:if="${trailer != null}" th:src="@{${trailer}}" id="trailer" title="YouTube Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
         </div>

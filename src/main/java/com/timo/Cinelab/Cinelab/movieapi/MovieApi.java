@@ -15,7 +15,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MovieApi {
@@ -53,10 +55,16 @@ public class MovieApi {
                     String.class
             ).getBody();
 
-            return objectMapper.convertValue(
+            List<Movie> movies = objectMapper.convertValue(
                     objectMapper.readTree(response).get("results"),
                     new TypeReference<>() {}
             );
+
+            return movies
+                    .stream()
+                    .filter(m -> m.getPoster_path() != null)
+                    .sorted(Comparator.comparingDouble(Movie::getPopularity).reversed())
+                    .toList();
         } catch (JsonProcessingException e) {
             System.out.println(e.getMessage());
             return List.of();
@@ -76,10 +84,16 @@ public class MovieApi {
                     String.class
             ).getBody();
 
-            return objectMapper.convertValue(
+            List<Movie> movies = objectMapper.convertValue(
                     objectMapper.readTree(response).get("results"),
                     new TypeReference<>() {}
             );
+
+            return movies
+                    .stream()
+                    .filter(m -> m.getPoster_path() != null)
+                    .sorted(Comparator.comparingDouble(Movie::getPopularity).reversed())
+                    .toList();
         } catch (JsonProcessingException e) {
             System.out.println(e.getMessage());
             return List.of();
@@ -173,12 +187,11 @@ public class MovieApi {
     }
 
     public String getMovieTrailerUrl(long id) {
-        return getMovieVideos(id)
+        Optional<Video> trailer = getMovieVideos(id)
                 .stream()
                 .filter(v -> v.getType().equalsIgnoreCase("trailer"))
-                .findFirst()
-                .get()
-                .getFullLink();
+                .findFirst();
+        return trailer.map(Video::getFullLink).orElse(null);
     }
 
     public static void main(String[] args) {

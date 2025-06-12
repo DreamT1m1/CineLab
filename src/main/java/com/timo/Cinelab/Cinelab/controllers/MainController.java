@@ -40,11 +40,7 @@ public class MainController {
     @GetMapping("/{id}")
     public String getMovieById(@PathVariable("id") long id, Model model) {
         model.addAttribute("movie", movieApi.getMovieLargeById(id));
-
-        List<BackDrop> backDropList = movieApi.getMovieBackDrops(id);
-
-        model.addAttribute("mainBackdrops", backDropList.subList(0, 5));
-        model.addAttribute("backdrops", movieApi.getMovieBackDrops(id).subList(5, backDropList.size()));
+        model.addAttribute("mainBackdrops", movieApi.getMovieBackDrops(id));
         model.addAttribute("trailer", movieApi.getMovieTrailerUrl(id));
         return "movies/movie_page";
     }
