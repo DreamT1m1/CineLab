@@ -160,7 +160,8 @@ public class MovieApi {
                         new TypeReference<>() {}
                 );
             } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
+                return List.of();
             }
     }
 
@@ -182,7 +183,8 @@ public class MovieApi {
                     new TypeReference<>() {}
             );
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+            return List.of();
         }
     }
 

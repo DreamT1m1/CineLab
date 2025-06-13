@@ -1,6 +1,7 @@
 #meta-info {
     width: 100%;
     display: flex;
+    position: relative;
     justify-content: space-between;
     margin-bottom: 20px;
 }
@@ -34,13 +35,14 @@
     height: 400px;
     display: flex;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 .image {
     display: block;
     height: 100%;
     border-radius: 10px;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .image:hover {
@@ -53,4 +55,52 @@
     height: 100%;
     border: none;
     border-radius: 10px;
+    margin-right: 10px;
+}
+
+#all-videos {
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}
+
+#video-ico {
+    display: block;
+    width: 20%;
+}
+
+#all-videos:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.media-window {
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    width: 80%;
+    height: fit-content;
+    display: none;
+    padding: 20px;
+}
+
+.media-window-shown {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.movie-page-container {
+    position: relative;
+}
+
+.video {
+    display: block;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }

@@ -14,7 +14,12 @@
 <body>
     <div th:replace="general/header :: header"></div>
     <main id="main">
-        <div class="container">
+        <div class="media-window" id="video-hover-window">
+            <div th:each="video : ${videos}">
+                <iframe th:if="${trailer != null}" th:data-src="@{${video.getFullLink()}}" class="video" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="container movie-page-container">
             <div id="meta-info">
                 <div id="main-info">
                     <h1 th:text="${movie.getTitle()}" id="main-title"></h1>
@@ -29,16 +34,20 @@
                         <h3>
                             Popularity
                         </h3>
-
+                        <span th:text="${movie.getPopularity()}"></span>
                     </div>
                 </div>
             </div>
             <div id="media">
                 <img th:src="@{${movie.getMoviePosterUrl()}}" alt="Main poster" class="image">
                 <iframe th:if="${trailer != null}" th:src="@{${trailer}}" id="trailer" title="YouTube Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div id="all-videos">
+                    <img th:src="@{/img/video-ico.svg}" alt="video-ico" id="video-ico">
+                </div>
             </div>
 
         </div>
     </main>
+    <script th:src="@{/scripts/showMediaHoverPageScript.js}"></script>
 </body>
 </html>
