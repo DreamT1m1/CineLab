@@ -1,0 +1,15 @@
+.form_container_input:focus {
+    outline: none;
+}
+
+.form_container {
+    width: 25%;
+}
+
+.container_form_input {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+}

@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
-    <header id="header">
-        <div id="logo">
-            <a th:href="@{/movies}" id="logo-link">
-                <h1>
-                    CineLab
-                </h1>
-            </a>
-        </div>
-        <div id="header-container">
-            <form th:action="@{/movies}" method="get" id="search-input-form">
-                <label>
-                    <input type="text" id="search-input" placeholder="Search by title" name="title">
-                </label>
-            </form>
-        </div>
-    </header>
-</body>
+    <body>
+        <header id="header">
+            <div id="logo">
+                <a th:href="@{/movies}" id="logo-link">
+                    <h1>
+                        CineLab
+                    </h1>
+                </a>
+            </div>
+            <div id="header-container">
+                <form th:action="@{/movies}" method="get" id="search-input-form">
+                    <label>
+                        <input type="text" id="search-input" placeholder="Search by title" name="title">
+                    </label>
+                </form>
+            </div>
+            <div id="auth">
+                <div>
+                    <a th:href="@{/login}">
+                        Log In
+                    </a>
+                </div>
+                <div>
+                    <a th:href="@{/register}">
+                        Register
+                    </a>
+                </div>
+            </div>
+        </header>
+    </body>
 </html>

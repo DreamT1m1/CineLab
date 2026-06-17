@@ -1,4 +1,4 @@
-package com.timo.Cinelab.Cinelab.models.movie;
+package com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels;
 
 import lombok.Getter;
 import lombok.Setter;

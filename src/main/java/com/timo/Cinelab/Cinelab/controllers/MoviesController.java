@@ -1,8 +1,5 @@
 package com.timo.Cinelab.Cinelab.controllers;
 
-import com.timo.Cinelab.Cinelab.models.movie.BackDrop;
-import com.timo.Cinelab.Cinelab.models.movie.MovieLarge;
-import com.timo.Cinelab.Cinelab.movieapi.MovieApi;
 import com.timo.Cinelab.Cinelab.services.MoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,16 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/movies")
-public class MainController {
+public class MoviesController {
 
     private final MoviesService moviesService;
 
     @Autowired
-    public MainController(MoviesService moviesService) {
+    public MoviesController(MoviesService moviesService) {
         this.moviesService = moviesService;
     }
 
@@ -35,7 +30,7 @@ public class MainController {
         if (title != null) {
             model.addAttribute("moviesList", moviesService.getMoviesByTitle(title));
         }
-        return "movies/movies_page";
+        return "public/movies/movies_page";
     }
 
     @GetMapping("/{id}")
@@ -44,7 +39,7 @@ public class MainController {
         model.addAttribute("mainBackdrops", moviesService.getMovieBackDrops(id));
         model.addAttribute("trailer", moviesService.getMovieTrailerUrl(id));
         model.addAttribute("videos", moviesService.getMovieVideos(id));
-        return "movies/movie_page";
+        return "public/movies/movie_page";
     }
 
 }

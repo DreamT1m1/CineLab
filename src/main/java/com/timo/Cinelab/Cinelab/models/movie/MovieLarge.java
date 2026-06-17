@@ -1,5 +1,6 @@
 package com.timo.Cinelab.Cinelab.models.movie;
 
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +31,7 @@ public class MovieLarge {
     private String release_date;
     private Long revenue;
     private Integer runtime;
+    private Boolean softcore;
     private List<SpokenLanguage> spoken_languages;
     private String status;
     private String tagline;

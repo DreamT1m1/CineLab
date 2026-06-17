@@ -1,9 +1,9 @@
 package com.timo.Cinelab.Cinelab.services;
 
-import com.timo.Cinelab.Cinelab.models.movie.BackDrop;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.BackDrop;
 import com.timo.Cinelab.Cinelab.models.movie.Movie;
 import com.timo.Cinelab.Cinelab.models.movie.MovieLarge;
-import com.timo.Cinelab.Cinelab.models.movie.Video;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Video;
 import com.timo.Cinelab.Cinelab.movieapi.MovieApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

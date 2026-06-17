@@ -2,13 +2,12 @@ package com.timo.Cinelab.Cinelab.movieapi;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.timo.Cinelab.Cinelab.models.movie.BackDrop;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.BackDrop;
 import com.timo.Cinelab.Cinelab.models.movie.Movie;
 import com.timo.Cinelab.Cinelab.models.movie.MovieLarge;
-import com.timo.Cinelab.Cinelab.models.movie.Video;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Video;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -135,6 +134,8 @@ public class MovieApi {
                     String.class
             ).getBody();
 
+            System.out.println(response);
+
             return objectMapper.readValue(response, MovieLarge.class);
         } catch (JsonProcessingException e) {
             System.out.println(e.getMessage());
@@ -196,8 +197,4 @@ public class MovieApi {
         return trailer.map(Video::getFullLink).orElse(null);
     }
 
-    public static void main(String[] args) {
-        MovieApi movieApi = new MovieApi();
-        System.out.println(movieApi.getMovieTrailerUrl(870028));
-    }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/general_style.css}">
+    <link rel="stylesheet" th:href="@{/css/movies_page.css}">
+    <link rel="stylesheet" th:href="@{/css/header_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/auth_page.css}">
+</head>
+<body>
+<div th:replace="general/header :: header"></div>
+<main id="main">
+    <div class="container">
+        <form action="/register" method="post" class="form_container">
+            <div class="container_form_input">
+                <label for="username" >Username: </label>
+                <input id="username" type="text" name="username" placeholder="Enter your login" class="form_container_input" required>
+            </div>
+            <div class="container_form_input">
+                <label for="email">Email: </label>
+                <input id="email" type="email" name="email" placeholder="Enter your email" class="form_container_input">
+            </div>
+            <div class="container_form_input">
+                <label for="name">Name: </label>
+                <input id="name" type="text" name="name" placeholder="Enter your name" class="form_container_input" required>
+            </div>
+            <div class="container_form_input">
+                <label for="password">Password: </label>
+                <input id="password" type="password" name="password" placeholder="Enter your password" class="form_container_input" required>
+            </div>
+            <div class="container_form_input">
+                <button type="submit" class="form_container_input">Sign up</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

@@ -1,7 +1,13 @@
 body {
     font-family: "Lexend Exa", serif;
     color: white;
-    background: linear-gradient(to bottom, #1a1a1d, #381c25);
+    background: linear-gradient(to bottom, #1a1a1d, #381c25) center center no-repeat;
+    height: 100vh;
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: white;
 }
 
 #main {

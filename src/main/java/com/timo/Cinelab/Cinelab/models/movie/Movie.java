@@ -25,6 +25,7 @@ public class Movie {
     private Boolean video;
     private Integer vote_average;
     private Integer vote_count;
+    private String softcore; // HZ 4to eto
 
     public Movie() {
     }
