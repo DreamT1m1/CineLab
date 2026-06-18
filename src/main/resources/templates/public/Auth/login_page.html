@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/general_style.css}">
     <link rel="stylesheet" th:href="@{/css/movies_page.css}">
     <link rel="stylesheet" th:href="@{/css/header_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/auth_page.css}">
 </head>
 <body>
     <div th:replace="general/header :: header"></div>
@@ -23,6 +24,9 @@
                 <div class="container_form_input">
                     <label for="password"> Password: </label>
                     <input id="password" type="password" name="password" placeholder="Enter your password" class="form_container_input" required>
+                </div>
+                <div th:if="${isAuthenticationFailed}" class="form_container_warning">
+                    <span class="form_container_warning">Wrong email or password!</span>
                 </div>
                 <div class="class_form_input">
                     <button type="submit" class="form_container_input">Sign in</button>

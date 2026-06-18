@@ -15,7 +15,7 @@ public class User {
     @Column(name = "id", nullable = false, length = 30)
     private int id;
     @Column(name = "login", nullable = false, length = 30)
-    private String login;
+    private String username;
     @Column(name = "email", nullable = false, length = 30)
     private String email;
     @Column(name = "name", nullable = false, length = 30)
@@ -27,8 +27,8 @@ public class User {
 
     public User() {}
 
-    public User(String login, String email, String name, String password, UserRole role) {
-        this.login = login;
+    public User(String username, String email, String name, String password, UserRole role) {
+        this.username = username;
         this.email = email;
         this.name = name;
         this.password = password;
