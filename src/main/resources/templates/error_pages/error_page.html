@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${user.getUsername()}"></title>
+    <title>Something went wrong</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -14,7 +14,9 @@
     <div th:replace="general/header :: header"></div>
     <main id="main">
         <div class="container">
-            <h1 th:text="${user.getUsername()}"></h1>
+            <div class="title">
+                <h1>Something went wrong</h1>
+            </div>
         </div>
     </main>
 </body>

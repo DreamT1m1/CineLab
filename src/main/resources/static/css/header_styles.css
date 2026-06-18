@@ -1,16 +1,12 @@
 #header {
     display: flex;
-    position: fixed;
-    z-index: 9999;
     width: 100%;
     align-items: center;
     height: 60px;
     padding: 10px;
     background-color: #17171a;
-    border: 1px solid #4e4e50;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    border: 1px none #4e4e50;
+    border-bottom-style: solid;
 }
 
 #header-container {
