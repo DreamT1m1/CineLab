@@ -42,7 +42,7 @@ public class MoviesController {
         model.addAttribute("movie", moviesService.getMovieLargeById(id));
         model.addAttribute("mainBackdrops", moviesService.getMovieBackDrops(id));
         model.addAttribute("trailer", moviesService.getMovieTrailerUrl(id));
-        model.addAttribute("videos", moviesService.getMovieVideos(id));
+        model.addAttribute("videos", moviesService.getMostPopularMovieVideos(id));
         if (authentication != null && authentication.isAuthenticated()) {
             model.addAttribute("has_watched", userService.hasUserWatchedMovie(userService.getCurrentUser().getId(), id));
         }

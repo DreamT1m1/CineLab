@@ -9,14 +9,23 @@
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/general_style.css}">
     <link rel="stylesheet" th:href="@{/css/header_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/account_styles.css}">
 </head>
 <body>
     <div th:replace="general/header :: header"></div>
     <main id="main">
         <div class="container">
             <h1 th:text="${user.getUsername()}"></h1>
+            <div class="watched_movies">
+                <ul>
+                    <li th:each="movie : ${userWatchedMovies}">
+                        <a th:href="@{/movies/{id}(id=${movie.getMovieId()})}">
+                            <span th:text="${movie.getTitle()}"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
     </main>
 </body>
 </html>

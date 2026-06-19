@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserService {
@@ -45,10 +47,14 @@ public class UserService {
 
     public void userNotWatchedMovie(long watchedMovieId,
                                     int userId) {
-        watchedMovieRepository.removeWatchedMoviesByUserIdAndMovieId(userId, watchedMovieId);
+        watchedMovieRepository.removeWatchedMovieByUserIdAndMovieId(userId, watchedMovieId);
     }
 
     public boolean hasUserWatchedMovie(int userId, long watchedMovieId) {
         return watchedMovieRepository.getWatchedMovieByUserIdAndMovieId(userId, watchedMovieId).isPresent();
+    }
+
+    public List<WatchedMovie> getUserWatchedMovies(int userId) {
+        return watchedMovieRepository.getWatchedMovieByUserId(userId);
     }
 }

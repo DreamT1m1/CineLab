@@ -20,7 +20,9 @@ public class UserController {
 
     @GetMapping("/{username}")
     public String getAccountPage(@PathVariable String username, Model model) {
-        model.addAttribute("user", userService.getUserByUsername(username));
+        User user = userService.getUserByUsername(username);
+        model.addAttribute("user", user);
+        model.addAttribute("userWatchedMovies", userService.getUserWatchedMovies(user.getId()));
         return "private/userRelatedPages/account";
     }
 

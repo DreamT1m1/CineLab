@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MoviesService {
@@ -45,6 +46,11 @@ public class MoviesService {
                 .stream()
                 .filter(Video::getOfficial)
                 .toList();
+    }
+
+    public List<Video> getMostPopularMovieVideos(long id) {
+        List<Video> videos = getMovieVideos(id);
+        return videos.size() > 10 ? videos.subList(0, 10) : videos;
     }
 
     public String getMovieTrailerUrl(long id) {
