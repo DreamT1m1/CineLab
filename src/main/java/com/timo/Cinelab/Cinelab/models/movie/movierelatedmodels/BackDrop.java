@@ -14,6 +14,7 @@ public class BackDrop {
     private Double vote_average;
     private Integer vote_count;
     private Integer width;
+    private String iso_3166_1;
 
     public BackDrop() {
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title th:text="${movie.getTitle()}"></title>
@@ -45,9 +45,18 @@
                     <img th:src="@{/img/video-ico.svg}" alt="video-ico" id="video-ico">
                 </div>
             </div>
+            <div sec:authorize="isAuthenticated()">
+                <input type="hidden" name="movieId" th:value="${movie.getId()}">
+                <input type="hidden" name="movieTitle" th:value="${movie.getTitle()}">
+                <select name="status" id="status" onchange="this.form.submit()" th:data-movie-id="${movie.id}" th:data-movie-title="${movie.title}">
+                    <option th:selected="${!has_watched}" value="not_watched">Not watched</option>
+                    <option th:selected="${has_watched}" value="watched">Watched</option>
+                </select>
+            </div>
 
         </div>
     </main>
     <script th:src="@{/scripts/showMediaHoverPageScript.js}"></script>
+    <script th:src="@{/scripts/changeMovieStatusForUser.js}"></script>
 </body>
 </html>

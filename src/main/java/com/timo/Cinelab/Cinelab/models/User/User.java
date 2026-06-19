@@ -1,8 +1,12 @@
 package com.timo.Cinelab.Cinelab.models.User;
 
+import com.timo.Cinelab.Cinelab.models.movie.WatchedMovie;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +28,9 @@ public class User {
     private String password;
     @Column(name = "role", nullable = false)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<WatchedMovie> watchedMovies = new ArrayList<>();
 
     public User() {}
 
