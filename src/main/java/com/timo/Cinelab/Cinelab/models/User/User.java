@@ -32,6 +32,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<WatchedMovie> watchedMovies = new ArrayList<>();
 
+    @Column(name = "avatar")
+    private String avatar;
+
     public User() {}
 
     public User(String username, String email, String name, String password, UserRole role) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title th:text="${user.getUsername()}"></title>
@@ -15,17 +15,46 @@
     <div th:replace="general/header :: header"></div>
     <main id="main">
         <div class="container">
-            <h1 th:text="${user.getUsername()}"></h1>
-            <div class="watched_movies">
-                <ul>
+            <div id="user_info">
+                <div id="avatar_related">
+                    <img th:if="${user.avatar == null}" th:src="@{/img/empty_profile.jpg}" alt="" class="main_avatar">
+                    <img th:if="${user.avatar != null}" th:src="@{'/avatars/' + ${user.getAvatar()}}" alt="user_avatar" class="main_avatar">
+                    <form th:if="${isCorrectUser}" id="avatar_form" action="/set_avatar" method="post" enctype="multipart/form-data">
+                        <input type="file" id="avatar_input" name="avatar" accept="image/*" onchange="document.getElementById('avatar_form').submit()">
+                        <label for="avatar_input">Upload an avatar</label>
+                    </form>
+                </div>
+                <div id="main_user_info">
+                    <h1 th:text="${user.getUsername()}" id="user_info_main_nickname"></h1>
+                    <h2 th:text="${user.getName()}"></h2>
+                </div>
+            </div>
+            <div>
+                <h2 th:if="${userWatchedMovies.size() != 0}">Watched movies</h2>
+                <ul class="watched_movies">
                     <li th:each="movie : ${userWatchedMovies}">
                         <a th:href="@{/movies/{id}(id=${movie.getMovieId()})}">
                             <span th:text="${movie.getTitle()}"></span>
                         </a>
+                        <select th:if="${isCorrectUser}" name="rating" class="rating" onchange="this.form.submit()" th:data-movie-id="${movie.getMovieId()}" th:data-user-id="${user.getId()}">
+                            <option value=" " th:selected="${movie.rating == null}" >Not rated</option>
+                            <option value="1" th:selected="${movie.rating == 1}">1</option>
+                            <option value="2" th:selected="${movie.rating == 2}">2</option>
+                            <option value="3" th:selected="${movie.rating == 3}">3</option>
+                            <option value="4" th:selected="${movie.rating == 4}">4</option>
+                            <option value="5" th:selected="${movie.rating == 5}">5</option>
+                            <option value="6" th:selected="${movie.rating == 6}">6</option>
+                            <option value="7" th:selected="${movie.rating == 7}">7</option>
+                            <option value="8" th:selected="${movie.rating == 8}">8</option>
+                            <option value="9" th:selected="${movie.rating == 9}">9</option>
+                            <option value="10" th:selected="${movie.rating == 10}">10</option>
+                        </select>
+                        <span th:if="${!isCorrectUser}" th:text="${movie.rating}"></span>
                     </li>
                 </ul>
             </div>
         </div>
     </main>
+    <script th:src="@{/scripts/addRatingForMoviesInProfile.js}"></script>
 </body>
 </html>

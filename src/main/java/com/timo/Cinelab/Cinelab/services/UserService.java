@@ -57,4 +57,16 @@ public class UserService {
     public List<WatchedMovie> getUserWatchedMovies(int userId) {
         return watchedMovieRepository.getWatchedMovieByUserId(userId);
     }
+
+    public void addRatingInProfile(long movieId, int userId, Integer rating) {
+        userRepository.changeMovieRatingOfUser(movieId, userId, rating);
+    }
+
+    public Integer getMovieRatingOfUser(long movieId, int userId) {
+        return userRepository.getMovieRatingOfUser(movieId, userId);
+    }
+
+    public void setAvatarForUser(String avatar, int userId) {
+        userRepository.updateAvatarForUser(avatar, userId);
+    }
 }

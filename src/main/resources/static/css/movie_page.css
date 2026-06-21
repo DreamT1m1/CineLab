@@ -18,9 +18,8 @@
     margin-bottom: 10px;
 }
 
-#secondary-info {
-    display: flex;
-    justify-content: space-between;
+#secondary-info span:not(:last-child) {
+    margin-bottom: 5px;
 }
 
 #release-date {

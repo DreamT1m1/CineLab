@@ -1,0 +1,46 @@
+.watched_movies > li {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.watched_movies > li > a {
+    margin-right: auto;
+}
+
+.watched_movies > li > select > option {
+    text-align: center;
+}
+
+#user_info {
+    display: flex;
+    margin-top: 50px;
+}
+
+.main_avatar {
+    width: 300px;
+    margin-right: 30px;
+    margin-bottom: 15px;
+}
+
+#user_info_main_nickname {
+
+}
+
+#avatar_form > input {
+    display: none;
+}
+
+#avatar_form > label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#avatar_form > label:hover {
+    background-color: #555;
+}

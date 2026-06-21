@@ -25,6 +25,9 @@ public class WatchedMovie {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "rating")
+    private Integer rating;
+
     public WatchedMovie(User user, Long movieId, String title) {
         this.user = user;
         this.movieId = movieId;
