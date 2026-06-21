@@ -20,6 +20,8 @@
             <div class="container_form_input">
                 <label for="username" >Username: </label>
                 <input id="username" type="text" name="username" placeholder="Enter your login" class="form_container_input" required>
+                <br>
+                <span th:if="${user_name_is_taken}">This username is already taken</span>
             </div>
             <div class="container_form_input">
                 <label for="email">Email: </label>

@@ -51,7 +51,14 @@ public class AuthController {
                                 @RequestParam String email,
                                 @RequestParam String name,
                                 @RequestParam String password,
+                                Model model,
                                 HttpServletRequest request) {
+
+        if (userService.userExistsByUsername(username)) {
+            model.addAttribute("user_name_is_taken", true);
+            return "public/Auth/registration_page";
+        }
+
         String encodedPassword = passwordEncoder.encode(password);
         User newUser = new User(username, email, name, encodedPassword, UserRole.USER);
         userService.save(newUser);

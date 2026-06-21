@@ -69,4 +69,8 @@ public class UserService {
     public void setAvatarForUser(String avatar, int userId) {
         userRepository.updateAvatarForUser(avatar, userId);
     }
+
+    public boolean userExistsByUsername(String userName) {
+        return userRepository.existsByUsername(userName);
+    }
 }

@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.UUID;
 
 @Controller
@@ -84,15 +83,26 @@ public class UserController {
         } else {
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
-            User user = userDetails.getUser();
+            User user = userService.getUserByUsername(userDetails.getUser().getUsername());
+            String oldAvatar = user.getAvatar();
+            Path avatarDirectory = Paths.get("uploads/avatars");
+
+            if (oldAvatar != null && !oldAvatar.isEmpty()) {
+                Path oldAvatarPath = avatarDirectory.resolve(oldAvatar);
+
+                System.out.println(oldAvatarPath);
+
+                if (Files.exists(oldAvatarPath)) {
+                    System.out.println(true);
+                    Files.delete(oldAvatarPath);
+                }
+            }
 
             String fileName = UUID.randomUUID() + "_" + avatar.getOriginalFilename();
 
-            Path path = Paths.get("uploads/avatars");
+            Files.createDirectories(avatarDirectory);
 
-            Files.createDirectories(path);
-
-            avatar.transferTo(path.resolve(fileName));
+            avatar.transferTo(avatarDirectory.resolve(fileName));
 
             userService.setAvatarForUser(fileName, user.getId());
 

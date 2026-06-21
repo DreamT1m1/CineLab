@@ -1,11 +1,14 @@
 package com.timo.Cinelab.Cinelab.controllers;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,17 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 public class GlobalExceptionHandler implements ErrorController {
 
     @GetMapping("/error")
-    public String getErrorPage() {
+    public String getErrorPage(HttpServletRequest request,
+                               Model model) {
+
+        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        Object message = request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
+        Object exception = request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
+
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
+        model.addAttribute("exception", exception);
+
         return "error_pages/error_page";
     }
 

@@ -16,6 +16,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findUserByUsername(String username);
 
+    boolean existsByUsername(String userName);
+
     @Query("UPDATE WatchedMovie wm SET wm.rating = :rating where wm.user.id = :userId and wm.movieId = :movieId")
     @Transactional
     @Modifying
