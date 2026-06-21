@@ -48,3 +48,17 @@
     padding: 7px 0;
     background: transparent;
 }
+
+#auth {
+    display: flex;
+    width: 10%;
+}
+
+#header_avatar {
+    width: 70px;
+    margin-left: auto;
+}
+
+#principals {
+    align-content: center;
+}
