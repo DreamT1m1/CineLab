@@ -33,10 +33,15 @@ public class UserController {
     public String getAccountPage(@PathVariable String username,
                                  Model model,
                                  @AuthenticationPrincipal CustomUserDetails userDetails) {
+
         User user = userService.getUserByUsername(username);
         model.addAttribute("user", user);
         model.addAttribute("userWatchedMovies", userService.getUserWatchedMovies(user.getId()));
-        model.addAttribute("isCorrectUser", userDetails.getUser().getUsername().equals(username));
+        if (userDetails == null) {
+            model.addAttribute("isCorrectUser", false);
+        } else {
+            model.addAttribute("isCorrectUser", userDetails.getUser().getUsername().equals(username));
+        }
 
         return "private/userRelatedPages/account";
     }
