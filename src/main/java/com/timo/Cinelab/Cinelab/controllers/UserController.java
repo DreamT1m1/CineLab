@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public String getAccountPage(@PathVariable String username,
+    public String getAccountPage(@PathVariable(name = "username") String username,
                                  Model model,
                                  @AuthenticationPrincipal CustomUserDetails userDetails) {
 
@@ -108,5 +108,29 @@ public class UserController {
 
             return String.format("redirect:/%s", user.getUsername());
         }
+    }
+
+    @GetMapping("/{username}/friend_invites")
+    public String getFriendInvitesPage(@PathVariable(name = "username") String userName,
+                                       Model model,
+                                       @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        if (!userName.equals(userDetails.getUser().getUsername())) {
+            return "error_pages/error_page";
+        }
+
+        return "private/userRelatedPages/friend_invites_page";
+    }
+
+    @GetMapping("/{username}/friends")
+    public String getFriendsPages(@PathVariable(name = "username") String userName,
+                                  Model model,
+                                  @AuthenticationPrincipal CustomUserDetails userDetails) {
+
+        if (!userName.equals(userDetails.getUser().getUsername())) {
+            return "error_pages/error_page";
+        }
+
+        return "private/userRelatedPages/friends";
     }
 }

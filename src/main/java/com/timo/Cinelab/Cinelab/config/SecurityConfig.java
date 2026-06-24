@@ -20,6 +20,7 @@ public class SecurityConfig {
                 // Authorization and general
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers("/friend_invites/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 // Logging in

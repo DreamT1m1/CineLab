@@ -51,14 +51,41 @@
 
 #auth {
     display: flex;
-    width: 10%;
+    height: 100%;
+    width: 25%;
 }
 
 #header_avatar {
-    width: 70px;
-    margin-left: auto;
+    height: 100%;
+    margin-left: 20px;
 }
 
 #principals {
     align-content: center;
+}
+
+.friends_buttons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 1px;
+    margin-left: 15px;
+}
+
+.friends_buttons > a {
+    display: flex;
+    background-color: #FFF;
+    height: 70%;
+    align-items: center;
+    border-radius: 8px;
+    padding: 3px;
+    transition: 0.2s;
+}
+
+.friends_buttons > a:hover {
+    height: 80%;
+}
+
+.friend_related_icons {
+    height: 60%;
 }
