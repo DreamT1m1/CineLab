@@ -30,8 +30,8 @@
                             </button>
 
                             <div th:case="'REQUEST_RECEIVED'">
-                                <button id="accept-friend-button">Accept</button>
-                                <button>Reject</button>
+                                <button id="accept-friend-button" th:data-id="${invite.getId()}" th:data-invite-id="${invite.getId()}">Accept</button>
+                                <button id="reject-friend-button" th:data-id="${invite.getId()}" th:data-invite-id="${invite.getId()}">Reject</button>
                             </div>
 
                             <button th:case="'FRIENDS'" disabled>
@@ -80,6 +80,8 @@
     </main>
     <script th:src="@{/scripts/addRatingForMoviesInProfile.js}"></script>
     <script th:src="@{/scripts/addFriend.js}"></script>
+    <script th:src="@{/scripts/acceptFriend.js}"></script>
+    <script th:src="@{/scripts/rejectFriend.js}"></script>
     <div th:replace="general/websocketscripts :: websocketscripts"></div>
 </body>
 </html>

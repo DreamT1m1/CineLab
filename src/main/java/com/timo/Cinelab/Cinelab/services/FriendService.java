@@ -62,6 +62,8 @@ public class FriendService {
 
             friendRelationRepository.save(friendRelation1);
             friendRelationRepository.save(friendRelation2);
+
+            friendInviteRepository.delete(invite);
         }
     }
 
@@ -86,6 +88,6 @@ public class FriendService {
     }
 
     public Optional<FriendInvite> getReceivedInvite(User currentUser, User profileUser) {
-        return friendInviteRepository.findBySenderAndReceiver(currentUser, profileUser);
+        return friendInviteRepository.findBySenderAndReceiver(profileUser, currentUser);
     }
 }
