@@ -3,6 +3,7 @@ package com.timo.Cinelab.Cinelab.controllers;
 import com.timo.Cinelab.Cinelab.models.User.CustomUserDetails;
 import com.timo.Cinelab.Cinelab.models.User.User;
 import com.timo.Cinelab.Cinelab.models.movie.WatchedMovie;
+import com.timo.Cinelab.Cinelab.services.FriendService;
 import com.timo.Cinelab.Cinelab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,10 +23,12 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private final FriendService friendService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, FriendService friendService) {
         this.userService = userService;
+        this.friendService = friendService;
     }
 
     @GetMapping("/{username}")
@@ -33,13 +36,23 @@ public class UserController {
                                  Model model,
                                  @AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        User user = userService.getUserByUsername(username);
-        model.addAttribute("user", user);
-        model.addAttribute("userWatchedMovies", userService.getUserWatchedMovies(user.getId()));
+        User profileUser = userService.getUserByUsername(username);
+        model.addAttribute("user", profileUser);
+        model.addAttribute("userWatchedMovies", userService.getUserWatchedMovies(profileUser.getId()));
+
         if (userDetails == null) {
             model.addAttribute("isCorrectUser", false);
+            model.addAttribute("authenticated", false);
         } else {
-            model.addAttribute("isCorrectUser", userDetails.getUser().getUsername().equals(username));
+            User currentUser = userDetails.getUser();
+            boolean isCorrectUser = currentUser.getUsername().equals(username);
+            model.addAttribute("authenticated", true);
+            model.addAttribute("isCorrectUser", isCorrectUser);
+
+            if (!isCorrectUser) {
+                 model.addAttribute("friendState", friendService.getFriendState(currentUser, profileUser).name());
+                 model.addAttribute("invite", friendService.getReceivedInvite(currentUser, profileUser).orElse(null));
+            }
         }
 
         return "private/userRelatedPages/account";
@@ -67,7 +80,6 @@ public class UserController {
                                      @RequestParam(required = false) Integer rating) {
         User user = userService.getCurrentUser();
         if (userId == user.getId()) {
-            System.out.println(movieId + " " + userId + " " + rating);
             userService.addRatingInProfile(movieId, userId, rating);
         }
 
@@ -110,27 +122,4 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{username}/friend_invites")
-    public String getFriendInvitesPage(@PathVariable(name = "username") String userName,
-                                       Model model,
-                                       @AuthenticationPrincipal CustomUserDetails userDetails) {
-
-        if (!userName.equals(userDetails.getUser().getUsername())) {
-            return "error_pages/error_page";
-        }
-
-        return "private/userRelatedPages/friend_invites_page";
-    }
-
-    @GetMapping("/{username}/friends")
-    public String getFriendsPages(@PathVariable(name = "username") String userName,
-                                  Model model,
-                                  @AuthenticationPrincipal CustomUserDetails userDetails) {
-
-        if (!userName.equals(userDetails.getUser().getUsername())) {
-            return "error_pages/error_page";
-        }
-
-        return "private/userRelatedPages/friends";
-    }
 }

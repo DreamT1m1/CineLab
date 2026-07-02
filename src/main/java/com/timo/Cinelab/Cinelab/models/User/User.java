@@ -38,12 +38,6 @@ public class User {
     @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FriendRelation> friendOf = new ArrayList<>();
 
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FriendInvite> receivedFriendInvites = new ArrayList<>();
-
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FriendInvite> sentFriendInvites = new ArrayList<>();
-
     @Column(name = "avatar")
     private String avatar;
 

@@ -2,6 +2,8 @@ package com.timo.Cinelab.Cinelab.services;
 
 import com.timo.Cinelab.Cinelab.models.User.User;
 import com.timo.Cinelab.Cinelab.models.movie.WatchedMovie;
+import com.timo.Cinelab.Cinelab.repository.FriendInviteRepository;
+import com.timo.Cinelab.Cinelab.repository.FriendRelationRepository;
 import com.timo.Cinelab.Cinelab.repository.UserRepository;
 import com.timo.Cinelab.Cinelab.repository.WatchedMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,11 @@ public class UserService {
     private final WatchedMovieRepository watchedMovieRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, WatchedMovieRepository watchedMovieRepository) {
+    public UserService(UserRepository userRepository,
+                       WatchedMovieRepository watchedMovieRepository,
+                       FriendRelationRepository friendRelationRepository,
+                       FriendInviteRepository friendInviteRepository) {
+
         this.userRepository = userRepository;
         this.watchedMovieRepository = watchedMovieRepository;
     }

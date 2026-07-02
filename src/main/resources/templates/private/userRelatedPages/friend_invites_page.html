@@ -9,8 +9,25 @@
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/general_style.css}">
     <link rel="stylesheet" th:href="@{/css/header_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/friend_invites_page_styles.css}">
 </head>
 <body>
     <div th:replace="general/header :: header"></div>
+
+    <main id="main">
+        <div class="container">
+            <div id="received_invites_list">
+                <div th:each="invite : ${received_invites}" class="received_invite">
+                    <a th:href="@{/{username}(username=${invite.getSender().getUsername()})}" th:text="${invite.getSender().getUsername()}"></a>
+                    <button id="accept-friend-button" th:data-id="${invite.getId()}" th:data-invite-id="${invite.getId()}">Accept</button>
+                    <button id="reject-friend-button" th:data-id="${invite.getId()}" th:data-invite-id="${invite.getId()}">Reject</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="general/websocketscripts :: websocketscripts"></div>
+    <script th:src="@{/scripts/acceptFriend.js}"></script>
+    <script th:src="@{/scripts/rejectFriend.js}"></script>
 </body>
 </html>

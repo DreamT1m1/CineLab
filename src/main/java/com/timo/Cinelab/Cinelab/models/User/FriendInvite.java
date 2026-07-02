@@ -22,7 +22,6 @@ public class FriendInvite {
     @JoinColumn(name = "receiver")
     private User receiver;
 
-
     public FriendInvite(User sender, User receiver) {
         this.sender = sender;
         this.receiver = receiver;

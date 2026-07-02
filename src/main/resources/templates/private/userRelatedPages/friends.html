@@ -12,5 +12,17 @@
 </head>
 <body>
     <div th:replace="general/header :: header"></div>
+
+    <main id="main">
+        <div class="container">
+            <div id="friends_list">
+                <div th:each="friend : ${friendsList}">
+                    <a th:href="@{/{username}(username=${friend.getUsername()})}" th:text="${friend.getUsername()}"></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="general/websocketscripts :: websocketscripts"></div>
 </body>
 </html>

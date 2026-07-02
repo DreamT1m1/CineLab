@@ -33,4 +33,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Modifying
     void updateAvatarForUser(@Param("avatar") String avatar, @Param("userId") int userId);
+
+
 }
