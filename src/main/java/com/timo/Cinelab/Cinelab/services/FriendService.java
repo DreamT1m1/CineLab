@@ -1,9 +1,7 @@
 package com.timo.Cinelab.Cinelab.services;
 
-import com.timo.Cinelab.Cinelab.models.User.FriendInvite;
-import com.timo.Cinelab.Cinelab.models.User.FriendRelation;
-import com.timo.Cinelab.Cinelab.models.User.FriendState;
-import com.timo.Cinelab.Cinelab.models.User.User;
+import com.timo.Cinelab.Cinelab.models.User.*;
+import com.timo.Cinelab.Cinelab.models.webSocket.Notification;
 import com.timo.Cinelab.Cinelab.repository.FriendInviteRepository;
 import com.timo.Cinelab.Cinelab.repository.FriendRelationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +18,14 @@ public class FriendService {
     private final FriendRelationRepository friendRelationRepository;
     private final FriendInviteRepository friendInviteRepository;
     private final UserService userService;
+    private final NotificationService notificationService;
 
     @Autowired
-    public FriendService(FriendRelationRepository friendRelationRepository, FriendInviteRepository friendInviteRepository, UserService userService) {
+    public FriendService(FriendRelationRepository friendRelationRepository, FriendInviteRepository friendInviteRepository, UserService userService, NotificationService notificationService) {
         this.friendRelationRepository = friendRelationRepository;
         this.friendInviteRepository = friendInviteRepository;
         this.userService = userService;
+        this.notificationService = notificationService;
     }
 
     public List<User> getFriendsOfUser(User user) {
@@ -34,6 +34,10 @@ public class FriendService {
 
     public void sendRequest(User sender, User receiver) {
         friendInviteRepository.save(new FriendInvite(sender, receiver));
+        notificationService.sendNotification(
+                receiver.getUsername(),
+                new FriendEvent("FRIEND_REQUEST", sender.getUsername())
+        );
     }
 
     public boolean friendInviteExists(User sender, User receiver) {

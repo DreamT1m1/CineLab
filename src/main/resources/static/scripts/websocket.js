@@ -5,17 +5,13 @@ const client = new StompJs.Client({
 
     onConnect: () => {
 
-        client.subscribe("/topic/messages", message => {
-            console.log(message.body);
-        });
-
-        client.publish({
-            destination: "/app/hello",
-
-            body: "Hello spring"
-        })
+        console.log("CONNECTED");
 
         client.subscribe("/user/queue/notifications", message => {
+
+            console.log("MESSAGE RECEIVED");
+
+            console.log(message.body);
 
         });
 

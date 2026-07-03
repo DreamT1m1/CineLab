@@ -1,4 +1,5 @@
-document.getElementById("add-friend-button").addEventListener("click", function(){
+document.getElementById("add-friend-button")?.addEventListener("click", function(){
+
     const userName = this.dataset.username;
 
     fetch(`/${userName}/send_friend_invite`, {

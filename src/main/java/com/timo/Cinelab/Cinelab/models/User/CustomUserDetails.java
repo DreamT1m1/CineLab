@@ -32,7 +32,7 @@ public class CustomUserDetails implements UserDetails {
     // Что используется как логин
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getUsername();
     }
 
     @Override
