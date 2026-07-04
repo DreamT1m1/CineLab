@@ -83,10 +83,10 @@ public class FriendController {
         friendService.rejectInvite(id);
     }
 
-    @PostMapping("/{username}/remove_friend/{id}")
+    @PostMapping("/remove_relation/{profileUserId}_{currentUserId}")
     @ResponseBody
-    public void removeFriend(@PathVariable(name = "username") String userName,
-                             @PathVariable(name = "id") int friendId) {
-
+    public void removeFriend(@PathVariable Long profileUserId,
+                             @PathVariable Long currentUserId) {
+        friendService.deleteFriendRelation(profileUserId, currentUserId);
     }
 }

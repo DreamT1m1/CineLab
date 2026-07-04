@@ -52,6 +52,12 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException(String.format("User with username %s was not found", userName)));
     }
 
+    public User getUserById(Long userId) {
+        return userRepository.
+                findUserById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User with provided id was not found"));
+    }
+
     public void userWatchedMovie(WatchedMovie watchedMovie) {
         watchedMovieRepository.save(watchedMovie);
     };

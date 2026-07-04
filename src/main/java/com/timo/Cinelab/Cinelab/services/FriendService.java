@@ -116,4 +116,21 @@ public class FriendService {
     public Optional<FriendInvite> getReceivedInvite(User currentUser, User profileUser) {
         return friendInviteRepository.findBySenderAndReceiver(profileUser, currentUser);
     }
+
+    public void deleteFriendRelation(Long userId, Long friendId) {
+        friendRelationRepository.deleteFriendRelation(userId, friendId);
+
+        User user1 = userService.getUserById(userId);
+        User user2 = userService.getUserById(friendId);
+
+        notificationService.sendNotification(
+                user1.getUsername(),
+                new FriendEvent("DELETE_RELATION", user2.getUsername(), null)
+        );
+
+        notificationService.sendNotification(
+                user2.getUsername(),
+                new FriendEvent("DELETE_RELATION", user1.getUsername(), null)
+        );
+    }
 }

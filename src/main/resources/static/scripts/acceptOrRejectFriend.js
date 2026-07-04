@@ -30,4 +30,15 @@ document.addEventListener("click", function (e) {
             renderFriendControls("NONE"));
     }
 
+    if (e.target.id === "delete-friend-button") {
+
+        const profileUserId = e.target.dataset.profileId;
+        const currentUserId = e.target.dataset.currentUserId;
+
+        fetch(`/remove_relation/${profileUserId}_${currentUserId}`, {
+            method: "POST"
+        }).then(() =>
+            renderFriendControls("DELETE_RELATION"))
+    }
+
 });

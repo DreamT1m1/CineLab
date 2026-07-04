@@ -19,7 +19,7 @@
                 <div id="avatar_related">
                     <img th:if="${user.avatar == null}" th:src="@{/img/empty_profile.jpg}" alt="" class="main_avatar">
                     <img th:if="${user.avatar != null}" th:src="@{'/avatars/' + ${user.getAvatar()}}" alt="user_avatar" class="main_avatar">
-                        <div th:if="${!isCorrectUser && authenticated}" id="friend-controls">
+                        <div th:if="${!isCorrectUser && authenticated}" id="friend-controls" th:data-profile-id="${user.getId()}" th:data-current-user-id="${#authentication.principal.user.getId()}">
                             <div th:switch="${friendState}">
                                 <button th:case="'NONE'" id="add-friend-button" th:data-username="${user.getUsername()}">
                                     Send friend request
@@ -34,9 +34,14 @@
                                     <button id="reject-friend-button" th:data-id="${invite.getId()}">Reject</button>
                                 </div>
 
-                                <button th:case="'FRIENDS'" disabled>
-                                    Friends
-                                </button>
+                                <div th:case="'FRIENDS'">
+                                    <button disabled>
+                                        Friends
+                                    </button>
+                                    <button id="delete-friend-button" th:data-profile-id="${user.getId()}" th:data-current-user-id="${#authentication.principal.user.getId()}">
+                                        Delete friend
+                                    </button>
+                                </div>
                             </div>
                     </div>
                     <form th:if="${isCorrectUser}" id="avatar_form" action="/set_avatar" method="post" enctype="multipart/form-data">

@@ -10,7 +10,7 @@ const client = new StompJs.Client({
             const event = JSON.parse(message.body);
 
             showNotification(event);
-            handleFriendEvent(event);
+            handleFriendEventWS(event);
 
         });
 
@@ -36,6 +36,8 @@ function showNotification(event) {
         div.innerText = `You're now friends with ${event.userName}`;
     } else if (event.type === "FRIEND_REJECTED") {
         return;
+    } else if (event.type === "DELETE_RELATION") {
+        div.innerText = `You're no longer friends with ${event.userName}`;
     }
 
     container.appendChild(div);
