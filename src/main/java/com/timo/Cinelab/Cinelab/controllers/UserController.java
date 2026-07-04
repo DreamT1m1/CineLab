@@ -102,10 +102,7 @@ public class UserController {
             if (oldAvatar != null && !oldAvatar.isEmpty()) {
                 Path oldAvatarPath = avatarDirectory.resolve(oldAvatar);
 
-                System.out.println(oldAvatarPath);
-
                 if (Files.exists(oldAvatarPath)) {
-                    System.out.println(true);
                     Files.delete(oldAvatarPath);
                 }
             }
