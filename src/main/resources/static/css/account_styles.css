@@ -51,10 +51,6 @@
     background-color: #555;
 }
 
-#watched_movies {
-
-}
-
 .dropdown-review-button {
     appearance: none;
     border: 1px solid #666;
@@ -92,4 +88,36 @@
     margin-bottom: 20px;
     width: 50%;
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+#watched-movies-nav-bar {
+    margin-top: 30px;
+}
+
+.previous-button {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #222;
+    margin-right: 10px;
+}
+
+.next-button {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #222;
+    margin-left: 10px;
+}
+
+.watched-movie-page-number {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #222;
+    margin-left: 8px;
+    margin-right: 8px;
+    transition: 0.2s;
+}
+
+.watched-movie-page-number:hover {
+    transform: scale(1.3);
 }

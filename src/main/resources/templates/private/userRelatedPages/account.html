@@ -89,6 +89,25 @@
                                 <button type="submit">Save</button>
                             </form>
                     </div>
+                    <div th:if="${moviePagesEnough}" id="watched-movies-nav-bar">
+                        <a th:if="${moviesPage.hasPrevious()}"
+                           th:href="@{/{username}(username=${username}, page=${moviesPage.number - 1})}" class="previous-button">
+                            Previous
+                        </a>
+                        <a th:if="${!moviesPage.hasPrevious()}" href="" class="previous-button">
+                            Previous
+                        </a>
+                        <span th:each="i : ${#numbers.sequence(0, moviesPage.totalPages - 1)}" class="watched-movie-page-number">
+                            <a th:href="@{/{username}(username=${username}, page=${i})}"
+                               th:text="${i + 1}"
+                               th:classappend="${i == moviesPage.number} ? 'active'">
+                            </a>
+                        </span>
+                        <a th:if="${moviesPage.hasNext()}"
+                           th:href="@{/{username}(username=${username}, page=${moviesPage.number + 1})}" class="next-button">
+                            Next
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

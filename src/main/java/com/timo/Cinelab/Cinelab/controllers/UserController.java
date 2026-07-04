@@ -6,6 +6,7 @@ import com.timo.Cinelab.Cinelab.models.movie.WatchedMovie;
 import com.timo.Cinelab.Cinelab.services.FriendService;
 import com.timo.Cinelab.Cinelab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -33,12 +34,18 @@ public class UserController {
 
     @GetMapping("/{username}")
     public String getAccountPage(@PathVariable(name = "username") String username,
+                                 @RequestParam(defaultValue = "0") int page,
                                  Model model,
                                  @AuthenticationPrincipal CustomUserDetails userDetails) {
 
         User profileUser = userService.getUserByUsername(username);
         model.addAttribute("user", profileUser);
-        model.addAttribute("userWatchedMovies", userService.getUserWatchedMovies(profileUser.getId()));
+
+        Page<WatchedMovie> moviesPage = userService.getUserWatchedMovies(profileUser.getId(), page);
+
+        model.addAttribute("moviesPage", moviesPage);
+        model.addAttribute("userWatchedMovies", moviesPage.getContent());
+        model.addAttribute("moviePagesEnough", moviesPage.getTotalPages() > 1);
 
         if (userDetails == null) {
             model.addAttribute("isCorrectUser", false);

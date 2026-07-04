@@ -8,6 +8,10 @@ import com.timo.Cinelab.Cinelab.repository.FriendRelationRepository;
 import com.timo.Cinelab.Cinelab.repository.UserRepository;
 import com.timo.Cinelab.Cinelab.repository.WatchedMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -73,6 +77,11 @@ public class UserService {
 
     public List<WatchedMovie> getUserWatchedMovies(Long userId) {
         return watchedMovieRepository.getWatchedMovieByUserId(userId);
+    }
+
+    public Page<WatchedMovie> getUserWatchedMovies(Long userId, int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("title").ascending());
+        return watchedMovieRepository.findByUserId(userId, pageable);
     }
 
     public void addRatingInProfile(long movieId, Long userId, Integer rating) {
