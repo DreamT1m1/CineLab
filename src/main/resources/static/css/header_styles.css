@@ -79,7 +79,13 @@
 
 .header_avatar {
     height: 100%;
+    border-radius: 8px;
     margin-left: 20px;
+    transition: 0.2s;
+}
+
+.header_avatar:hover {
+    transform: scale(1.05);
 }
 
 #principals {
