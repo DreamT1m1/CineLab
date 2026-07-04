@@ -23,11 +23,11 @@
             <div id="meta-info">
                 <div id="main-info">
                     <h1 th:text="${movie.getTitle()}" id="main-title"></h1>
-                    <span th:text="${movie.getOriginal_title()}" id="original-title"></span>
                     <div id="secondary-info">
-                        <span th:text="${movie.getRelease_date()}" id="release-date"></span>
-                        <span th:text="${movie.getRuntimeInHoursAndMinutes()}" id="runtime"></span>
-                        <span th:text="${movie.getOverview()}" id="overview"></span>
+                        <span th:inline="text">Director: [[${director.getName()}]]</span>
+                        <span th:inline="text" id="release-date">Release date: [[${movie.getRelease_date()}]]</span>
+                        <span th:inline="text" id="runtime">Runtime: [[${movie.getRuntimeInHoursAndMinutes()}]]</span>
+                        <p th:text="${movie.getOverview()}" id="overview"></p>
                     </div>
                 </div>
                 <div id="ratings">

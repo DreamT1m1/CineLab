@@ -27,9 +27,9 @@
                 <span>Log out</span>
             </a>
         </div>
-        <a th:href="@{/{username}(username=${#authentication.principal.user.username})}">
-            <img sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.avatar != null}" th:src="@{'/avatars/' + ${#authentication.principal.user.avatar}}" alt="user_avatar" class="header_avatar">
-            <img sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.avatar == null}" th:src="@{/img/empty_profile.jpg}" alt="user_avatar" class="header_avatar">
+        <a sec:authorize="isAuthenticated()" th:href="@{/{username}(username=${#authentication.principal.user.username})}">
+            <img th:if="${#authentication.principal.user.avatar != null}" th:src="@{'/avatars/' + ${#authentication.principal.user.avatar}}" alt="user_avatar" class="header_avatar">
+            <img th:if="${#authentication.principal.user.avatar == null}" th:src="@{/img/empty_profile.jpg}" alt="user_avatar" class="header_avatar">
         </a>
         <div sec:authorize="isAuthenticated()" class="friends_buttons">
             <a th:href="@{/{userName}/friend_invites(userName=${#authentication.principal.user.username})}">

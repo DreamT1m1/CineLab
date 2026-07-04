@@ -3,13 +3,14 @@ package com.timo.Cinelab.Cinelab.services;
 import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.BackDrop;
 import com.timo.Cinelab.Cinelab.models.movie.Movie;
 import com.timo.Cinelab.Cinelab.models.movie.MovieLarge;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Actor;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Crew;
 import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Video;
 import com.timo.Cinelab.Cinelab.movieapi.MovieApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MoviesService {
@@ -55,5 +56,13 @@ public class MoviesService {
 
     public String getMovieTrailerUrl(long id) {
         return movieApi.getMovieTrailerUrl(id);
+    }
+
+    public Crew getMovieDirector(long id) {
+        return movieApi.getMovieDirector(id);
+    }
+
+    public List<Actor> getMovieActors(long id) {
+        return movieApi.getMovieCastById(id);
     }
 }

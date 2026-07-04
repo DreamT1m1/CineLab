@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.BackDrop;
 import com.timo.Cinelab.Cinelab.models.movie.Movie;
 import com.timo.Cinelab.Cinelab.models.movie.MovieLarge;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Actor;
+import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Crew;
 import com.timo.Cinelab.Cinelab.models.movie.movierelatedmodels.Video;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +27,10 @@ public class MovieApi {
     private static final String MOVIES_BY_TITLE_URL = "https://api.themoviedb.org/3/search/movie?api_key=YOUR_API_KEY&query=";
     private static final String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular";
     private static final String MOVIE_BY_ID_URL = "https://api.themoviedb.org/3/movie/";
+
+    private static String getMovieCreditsUrlById(Long id) {
+        return String.format("https://api.themoviedb.org/3/movie/%d/credits", id);
+    }
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
@@ -134,8 +140,6 @@ public class MovieApi {
                     String.class
             ).getBody();
 
-            System.out.println(response);
-
             return objectMapper.readValue(response, MovieLarge.class);
         } catch (JsonProcessingException e) {
             System.out.println(e.getMessage());
@@ -195,6 +199,67 @@ public class MovieApi {
                 .filter(v -> v.getType().equalsIgnoreCase("trailer"))
                 .findFirst();
         return trailer.map(Video::getFullLink).orElse(null);
+    }
+
+    public List<Actor> getMovieCastById(Long id) {
+        try {
+            String finalUrl = getMovieCreditsUrlById(id);
+
+            HttpEntity<String> httpEntity = new HttpEntity<>(getHttpHeaders());
+
+            JsonNode response = objectMapper.readTree(restTemplate.exchange(
+                    finalUrl,
+                    HttpMethod.GET,
+                    httpEntity,
+                    String.class
+            ).getBody()).path("cast");
+
+            return objectMapper.readValue(
+                    response.toString(),
+                    new TypeReference<>() {}
+            );
+
+        } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
+            return List.of();
+        }
+    }
+
+    public List<Crew> getMovieCrewById(Long id) {
+        try {
+            String finalUrl = getMovieCreditsUrlById(id);
+
+            HttpEntity<String> httpEntity = new HttpEntity<>(getHttpHeaders());
+
+            JsonNode response = objectMapper.readTree(restTemplate.exchange(
+                    finalUrl,
+                    HttpMethod.GET,
+                    httpEntity,
+                    String.class
+            ).getBody()).path("crew");
+
+            return objectMapper.readValue(
+                    response.toString(),
+                    new TypeReference<>() {}
+            );
+
+        } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
+            return List.of();
+        }
+    }
+
+    public List<Actor> getMovieActors(Long id) {
+        return getMovieCastById(id).stream()
+                .filter(person -> person.getKnown_for_department().equals("Acting") && person.getOrder() < 16)
+                .toList();
+    }
+
+    public Crew getMovieDirector(Long id) {
+        return getMovieCrewById(id).stream()
+                .filter(c -> c.getJob().equals("Director"))
+                .toList()
+                .getFirst();
     }
 
 }

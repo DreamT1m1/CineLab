@@ -10,24 +10,14 @@
 
 }
 
-#original-title {
+#secondary-info > span {
     display: block;
-}
-
-#original-title {
-    margin-bottom: 10px;
-}
-
-#release-date {
-    display: block;
-}
-
-#runtime {
-    display: block;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 #overview {
+    text-indent: 2em;
+    line-height: 1.5;
     margin-bottom: 20px;
 }
 
