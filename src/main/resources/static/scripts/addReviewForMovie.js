@@ -1,4 +1,4 @@
-document.querySelectorAll(".dropdown-review-text").forEach(form => {
+document.querySelectorAll(".dropdown-review-text-form").forEach(form => {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();

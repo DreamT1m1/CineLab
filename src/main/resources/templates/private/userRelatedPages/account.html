@@ -59,13 +59,13 @@
             </div>
             <div>
                 <h2 th:if="${userWatchedMovies.size() != 0}">Watched movies</h2>
-                <div class="watched_movies">
+                <div id="watched_movies">
                     <div th:each="movie : ${userWatchedMovies}" class="watched-movie">
                             <div class="title-button-review">
                                 <a th:href="@{/movies/{id}(id=${movie.getMovieId()})}">
                                     <span th:inline="text" class="watched-movie-title">[[${movie.getTitle()}]] ([[${movie.getReleaseYear()}]])</span>
                                 </a>
-                                <button type="button" class="dropdown-review-button">⮟</button>
+                                <button th:if="${authenticated && isCorrectUser}" type="button" class="dropdown-review-button">⮟</button>
                                 <select th:if="${isCorrectUser}" name="rating" class="rating" onchange="this.form.submit()" th:data-movie-id="${movie.getMovieId()}" th:data-user-id="${user.getId()}">
                                     <option value=" " th:selected="${movie.rating == null}" >Not rated</option>
                                     <option value="1" th:selected="${movie.rating == 1}">1</option>
@@ -81,7 +81,8 @@
                                 </select>
                                 <span th:if="${!isCorrectUser}" th:text="${movie.rating}"></span>
                             </div>
-                            <form th:if="${authenticated && isCorrectUser}" type="text" method="post" class="dropdown-review-text">
+                            <span th:if="${movie.getReview() != null && !movie.getReview().isBlank()}" th:text="${movie.getReview()}" class="dropdown-review-text"></span>
+                            <form th:if="${authenticated && isCorrectUser}" type="text" method="post" class="dropdown-review-text-form">
                                 <input type="hidden" name="movieId" th:value="${movie.getMovieId()}">
                                 <input type="hidden" name="userName" th:value="${user.getUsername()}">
                                 <input type="text" name="review">
