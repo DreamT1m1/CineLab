@@ -28,12 +28,21 @@ public class WatchedMovie {
     @Column(name = "rating")
     private Integer rating;
 
-    public WatchedMovie(User user, Long movieId, String title) {
+    @Column(name = "release_year")
+    private Integer releaseYear;
+
+    @Column(name = "review")
+    private String review;
+
+    public WatchedMovie(User user, Long movieId, String title, Integer releaseYear, String review) {
         this.user = user;
         this.movieId = movieId;
         this.title = title;
+        this.releaseYear = releaseYear;
+        this.review = review;
     }
 
     public WatchedMovie() {
     }
+
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface WatchedMovieRepository extends JpaRepository<WatchedMovie, Integer> {
-    void removeWatchedMovieByUserIdAndMovieId(int userId, long movieId);
-    Optional<WatchedMovie> getWatchedMovieByUserIdAndMovieId(int userId, long movieId);
-    List<WatchedMovie> getWatchedMovieByUserId(int userId);
+    void removeWatchedMovieByUserIdAndMovieId(Long userId, long movieId);
+    Optional<WatchedMovie> getWatchedMovieByUserIdAndMovieId(Long userId, long movieId);
+    List<WatchedMovie> getWatchedMovieByUserId(Long userId);
 }

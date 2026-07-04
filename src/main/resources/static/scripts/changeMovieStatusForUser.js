@@ -2,6 +2,7 @@ document.getElementById("status").addEventListener("change", function () {
 
     const movieId = this.dataset.movieId;
     const movieTitle = this.dataset.movieTitle;
+    const year = this.dataset.year;
     const status = this.value;
 
     fetch("/change_movie_status", {
@@ -12,7 +13,8 @@ document.getElementById("status").addEventListener("change", function () {
         body:
             "movieId=" + movieId +
             "&movieTitle=" + movieTitle +
-            "&status=" + status
+            "&status=" + status +
+            "&year=" + year
     });
 
 });

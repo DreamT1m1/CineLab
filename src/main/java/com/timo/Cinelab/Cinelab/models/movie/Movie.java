@@ -3,6 +3,8 @@ package com.timo.Cinelab.Cinelab.models.movie;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Getter
@@ -41,5 +43,11 @@ public class Movie {
 
     public String getMoviePosterUrl() {
         return IMAGE_URL + poster_path;
+    }
+
+    public Integer getReleaseYear() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(release_date, dateTimeFormatter);
+        return date.getYear();
     }
 }

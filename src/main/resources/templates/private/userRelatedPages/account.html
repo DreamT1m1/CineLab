@@ -59,31 +59,42 @@
             </div>
             <div>
                 <h2 th:if="${userWatchedMovies.size() != 0}">Watched movies</h2>
-                <ul class="watched_movies">
-                    <li th:each="movie : ${userWatchedMovies}">
-                        <a th:href="@{/movies/{id}(id=${movie.getMovieId()})}">
-                            <span th:text="${movie.getTitle()}"></span>
-                        </a>
-                        <select th:if="${isCorrectUser}" name="rating" class="rating" onchange="this.form.submit()" th:data-movie-id="${movie.getMovieId()}" th:data-user-id="${user.getId()}">
-                            <option value=" " th:selected="${movie.rating == null}" >Not rated</option>
-                            <option value="1" th:selected="${movie.rating == 1}">1</option>
-                            <option value="2" th:selected="${movie.rating == 2}">2</option>
-                            <option value="3" th:selected="${movie.rating == 3}">3</option>
-                            <option value="4" th:selected="${movie.rating == 4}">4</option>
-                            <option value="5" th:selected="${movie.rating == 5}">5</option>
-                            <option value="6" th:selected="${movie.rating == 6}">6</option>
-                            <option value="7" th:selected="${movie.rating == 7}">7</option>
-                            <option value="8" th:selected="${movie.rating == 8}">8</option>
-                            <option value="9" th:selected="${movie.rating == 9}">9</option>
-                            <option value="10" th:selected="${movie.rating == 10}">10</option>
-                        </select>
-                        <span th:if="${!isCorrectUser}" th:text="${movie.rating}"></span>
-                    </li>
-                </ul>
+                <div class="watched_movies">
+                    <div th:each="movie : ${userWatchedMovies}" class="watched-movie">
+                            <div class="title-button-review">
+                                <a th:href="@{/movies/{id}(id=${movie.getMovieId()})}">
+                                    <span th:inline="text" class="watched-movie-title">[[${movie.getTitle()}]] ([[${movie.getReleaseYear()}]])</span>
+                                </a>
+                                <button type="button" class="dropdown-review-button">⮟</button>
+                                <select th:if="${isCorrectUser}" name="rating" class="rating" onchange="this.form.submit()" th:data-movie-id="${movie.getMovieId()}" th:data-user-id="${user.getId()}">
+                                    <option value=" " th:selected="${movie.rating == null}" >Not rated</option>
+                                    <option value="1" th:selected="${movie.rating == 1}">1</option>
+                                    <option value="2" th:selected="${movie.rating == 2}">2</option>
+                                    <option value="3" th:selected="${movie.rating == 3}">3</option>
+                                    <option value="4" th:selected="${movie.rating == 4}">4</option>
+                                    <option value="5" th:selected="${movie.rating == 5}">5</option>
+                                    <option value="6" th:selected="${movie.rating == 6}">6</option>
+                                    <option value="7" th:selected="${movie.rating == 7}">7</option>
+                                    <option value="8" th:selected="${movie.rating == 8}">8</option>
+                                    <option value="9" th:selected="${movie.rating == 9}">9</option>
+                                    <option value="10" th:selected="${movie.rating == 10}">10</option>
+                                </select>
+                                <span th:if="${!isCorrectUser}" th:text="${movie.rating}"></span>
+                            </div>
+                            <form th:if="${authenticated && isCorrectUser}" type="text" method="post" class="dropdown-review-text">
+                                <input type="hidden" name="movieId" th:value="${movie.getMovieId()}">
+                                <input type="hidden" name="userName" th:value="${user.getUsername()}">
+                                <input type="text" name="review">
+                                <button type="submit">Save</button>
+                            </form>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
     <script th:src="@{/scripts/addRatingForMoviesInProfile.js}"></script>
+    <script th:src="@{/scripts/toggleReviewInProfile.js}"></script>
+    <script th:src="@{/scripts/addReviewForMovie.js}"></script>
     <div th:replace="general/websocketscripts :: websocketscripts"></div>
 </body>
 </html>

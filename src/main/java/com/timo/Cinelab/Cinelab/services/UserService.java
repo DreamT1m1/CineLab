@@ -63,27 +63,31 @@ public class UserService {
     };
 
     public void userNotWatchedMovie(long watchedMovieId,
-                                    int userId) {
+                                    Long userId) {
         watchedMovieRepository.removeWatchedMovieByUserIdAndMovieId(userId, watchedMovieId);
     }
 
-    public boolean hasUserWatchedMovie(int userId, long watchedMovieId) {
+    public boolean hasUserWatchedMovie(Long userId, long watchedMovieId) {
         return watchedMovieRepository.getWatchedMovieByUserIdAndMovieId(userId, watchedMovieId).isPresent();
     }
 
-    public List<WatchedMovie> getUserWatchedMovies(int userId) {
+    public List<WatchedMovie> getUserWatchedMovies(Long userId) {
         return watchedMovieRepository.getWatchedMovieByUserId(userId);
     }
 
-    public void addRatingInProfile(long movieId, int userId, Integer rating) {
+    public void addRatingInProfile(long movieId, Long userId, Integer rating) {
         userRepository.changeMovieRatingOfUser(movieId, userId, rating);
     }
 
-    public Integer getMovieRatingOfUser(long movieId, int userId) {
+    public void addReviewForMovie(Long movieId, Long userId, String review) {
+        userRepository.addReviewForMovieByUser(review, movieId, userId);
+    }
+
+    public Integer getMovieRatingOfUser(long movieId, Long userId) {
         return userRepository.getMovieRatingOfUser(movieId, userId);
     }
 
-    public void setAvatarForUser(String avatar, int userId) {
+    public void setAvatarForUser(String avatar, Long userId) {
         userRepository.updateAvatarForUser(avatar, userId);
     }
 

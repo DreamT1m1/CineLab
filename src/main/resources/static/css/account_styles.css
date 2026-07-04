@@ -1,14 +1,20 @@
-.watched_movies > li {
+.title-button-review {
     width: 50%;
     display: flex;
     align-items: center;
+    transition: 1.2s;
 }
 
-.watched_movies > li > a {
+.title-button-review > a:hover .watched-movie-title {
+    display: block;
+    transform: scale(1.05);
+}
+
+.title-button-review > a {
     margin-right: auto;
 }
 
-.watched_movies > li > select > option {
+.title-button-review > select > option {
     text-align: center;
 }
 
@@ -43,4 +49,34 @@
 
 #avatar_form > label:hover {
     background-color: #555;
+}
+
+.dropdown-review-button {
+    appearance: none;
+    border: 1px solid #666;
+    background: #222;
+    color: white;
+    height: 24px;
+    width: 24px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.dropdown-review-text {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+
+    transform: translateY(-8px);
+
+    transition:
+            max-height .3s ease,
+            opacity .25s ease,
+            transform .25s ease;
+}
+
+.dropdown-review-text.open {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
 }

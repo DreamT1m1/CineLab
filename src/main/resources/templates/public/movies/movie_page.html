@@ -49,7 +49,7 @@
             <div sec:authorize="isAuthenticated()">
                 <input type="hidden" name="movieId" th:value="${movie.getId()}">
                 <input type="hidden" name="movieTitle" th:value="${movie.getTitle()}">
-                <select name="status" id="status" onchange="this.form.submit()" th:data-movie-id="${movie.id}" th:data-movie-title="${movie.title}">
+                <select name="status" id="status" onchange="this.form.submit()" th:data-movie-id="${movie.id}" th:data-movie-title="${movie.title}" th:data-year="${movie.getReleaseYear()}">
                     <option th:selected="${!has_watched}" value="not_watched">Not watched</option>
                     <option th:selected="${has_watched}" value="watched">Watched</option>
                 </select>

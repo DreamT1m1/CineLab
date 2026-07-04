@@ -61,10 +61,12 @@ public class UserController {
     @PostMapping("/change_movie_status")
     @ResponseBody
     public String changeMovieStatusForUser(@RequestParam Long movieId,
-                                                   @RequestParam String status,
-                                                   @RequestParam String movieTitle) {
+                                           @RequestParam String status,
+                                           @RequestParam String movieTitle,
+                                           @RequestParam Integer year
+                                           ) {
         User user = userService.getCurrentUser();
-        WatchedMovie watchedMovie = new WatchedMovie(user, movieId, movieTitle);
+        WatchedMovie watchedMovie = new WatchedMovie(user, movieId, movieTitle, year, "");
         if (status.equals("watched")) {;
             userService.userWatchedMovie(watchedMovie);
         } else if (status.equals("not_watched")) {
@@ -76,14 +78,30 @@ public class UserController {
     @PostMapping("/add_rating_in_profile")
     @ResponseBody
     public String addRatingInProfile(@RequestParam Long movieId,
-                                     @RequestParam int userId,
+                                     @RequestParam Long userId,
                                      @RequestParam(required = false) Integer rating) {
         User user = userService.getCurrentUser();
-        if (userId == user.getId()) {
+        if (userId.equals(user.getId())) {
             userService.addRatingInProfile(movieId, userId, rating);
         }
 
         return "";
+    }
+
+    @PostMapping("/add_review")
+    @ResponseBody
+    public String addReviewForMovie(@RequestParam Long movieId,
+                                    @RequestParam String review,
+                                    @RequestParam String userName) {
+        User user = userService.getCurrentUser();
+
+        if (user.getUsername().equals(userName)) {
+            userService.addReviewForMovie(movieId, user.getId(), review);
+
+            return "";
+        }
+
+        return "redirect:/error_page";
     }
 
     @PostMapping("/set_avatar")

@@ -20,21 +20,28 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     boolean existsByUsername(String userName);
 
-    @Query("UPDATE WatchedMovie wm SET wm.rating = :rating where wm.user.id = :userId and wm.movieId = :movieId")
+    @Query("UPDATE WatchedMovie wm SET wm.rating = :rating WHERE wm.user.id = :userId AND wm.movieId = :movieId")
     @Transactional
     @Modifying
     void changeMovieRatingOfUser(@Param("movieId") Long movieId,
-                                 @Param("userId") Integer userId,
+                                 @Param("userId") Long userId,
                                  @Param("rating") Integer rating);
+
+    @Query("UPDATE WatchedMovie wm SET wm.review = :review WHERE wm.movieId = :movieId AND wm.user.id = :userId")
+    @Transactional
+    @Modifying
+    void addReviewForMovieByUser(@Param("review") String review,
+                                 @Param("movieId") Long movieId,
+                                 @Param("userId") Long userId);
 
     @Query("SELECT wm.rating from WatchedMovie wm WHERE wm.movieId = :movieId AND wm.user.id = :userId")
     Integer getMovieRatingOfUser(@Param("movieId") Long movieId,
-                                 @Param("userId") int userId);
+                                 @Param("userId") Long userId);
 
     @Query("UPDATE User user SET user.avatar = :avatar WHERE user.id = :userId")
     @Transactional
     @Modifying
-    void updateAvatarForUser(@Param("avatar") String avatar, @Param("userId") int userId);
+    void updateAvatarForUser(@Param("avatar") String avatar, @Param("userId") Long userId);
 
 
 }
