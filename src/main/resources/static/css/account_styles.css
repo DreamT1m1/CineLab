@@ -121,3 +121,7 @@
 .watched-movie-page-number:hover {
     transform: scale(1.3);
 }
+
+.watched-movie-page-number:has(a.active) {
+    border: 2px solid aliceblue;
+}
