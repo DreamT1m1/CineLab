@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/general_style.css}">
     <link rel="stylesheet" th:href="@{/css/header_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/friends_page_styles.css}">
 </head>
 <body>
     <div th:replace="general/header :: header"></div>
@@ -16,8 +17,12 @@
     <main id="main">
         <div class="container">
             <div id="friends_list">
-                <div th:each="friend : ${friendsList}">
-                    <a th:href="@{/{username}(username=${friend.getUsername()})}" th:text="${friend.getUsername()}"></a>
+                <div th:each="friend : ${friendsList}" class="friend">
+                    <a th:href="@{/{username}(username=${friend.getUsername()})}" class="friend-link">
+                        <span th:text="${friend.getUsername()}" class="friend-username"></span>
+                        <img th:if="${friend.getAvatar() != null}" th:src="@{'/avatars/' + ${friend.getAvatar()}}" alt="friend-avatar" class="friend-avatar">
+                        <img th:if="${friend.getAvatar() == null}" th:src="@{/img/empty_profile.jpg}" alt="friend-avatar" class="friend-avatar">
+                    </a>
                 </div>
             </div>
         </div>

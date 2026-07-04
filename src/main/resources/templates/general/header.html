@@ -2,6 +2,7 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <body>
 <header th:fragment="header" id="header">
+    <div id="notifications"></div>
     <div id="logo">
         <a th:href="@{/movies}" id="logo-link">
             <h1>
@@ -26,7 +27,10 @@
                 <span>Log out</span>
             </a>
         </div>
-        <img sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.avatar != null}" th:src="@{'/avatars/' + ${#authentication.principal.user.avatar}}" alt="user_avatar" id="header_avatar">
+        <a th:href="@{/{username}(username=${#authentication.principal.user.username})}">
+            <img sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.avatar != null}" th:src="@{'/avatars/' + ${#authentication.principal.user.avatar}}" alt="user_avatar" class="header_avatar">
+            <img sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.avatar == null}" th:src="@{/img/empty_profile.jpg}" alt="user_avatar" class="header_avatar">
+        </a>
         <div sec:authorize="isAuthenticated()" class="friends_buttons">
             <a th:href="@{/{userName}/friend_invites(userName=${#authentication.principal.user.username})}">
                 <img th:src="@{/img/friend_invite_icon.png}" alt="friend_invite_ico" class="friend_related_icons">
@@ -48,8 +52,5 @@
         </div>
     </div>
 </header>
-
-<div th:replace="general/websocketscripts :: websocketscripts"></div>
-
 </body>
 </html>

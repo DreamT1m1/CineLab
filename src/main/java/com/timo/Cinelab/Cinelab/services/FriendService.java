@@ -33,10 +33,11 @@ public class FriendService {
     }
 
     public void sendRequest(User sender, User receiver) {
-        friendInviteRepository.save(new FriendInvite(sender, receiver));
+        FriendInvite friendInvite = friendInviteRepository.save(new FriendInvite(sender, receiver));
+
         notificationService.sendNotification(
                 receiver.getUsername(),
-                new FriendEvent("FRIEND_REQUEST", sender.getUsername())
+                new FriendEvent("FRIEND_REQUEST", sender.getUsername(), friendInvite.getId())
         );
     }
 
@@ -49,16 +50,22 @@ public class FriendService {
     }
 
     @Transactional
-    public void acceptInvite(Long inviteId) throws AccessDeniedException {
+    public void acceptInvite(Long inviteId) {
 
         FriendInvite invite = friendInviteRepository.findById(inviteId).orElseThrow();
 
         User sender = invite.getSender();
         User receiver = invite.getReceiver();
 
-        if (!receiver.equals(userService.getCurrentUser())) {
-            throw new AccessDeniedException("Forbidden");
-        }
+        notificationService.sendNotification(
+                sender.getUsername(),
+                new FriendEvent("FRIEND_ACCEPTED", receiver.getUsername(), null)
+        );
+
+        notificationService.sendNotification(
+                receiver.getUsername(),
+                new FriendEvent("FRIEND_ACCEPTED", sender.getUsername(), null)
+        );
 
         if (!sender.equals(receiver)) {
             FriendRelation friendRelation1 = new FriendRelation(sender, receiver);
@@ -74,6 +81,21 @@ public class FriendService {
     @Transactional
     public void rejectInvite(Long inviteId) {
         friendInviteRepository.delete(friendInviteRepository.findById(inviteId).orElseThrow());
+
+        FriendInvite invite = friendInviteRepository.findById(inviteId).orElseThrow();
+
+        User sender = invite.getSender();
+        User receiver = invite.getReceiver();
+
+        notificationService.sendNotification(
+                sender.getUsername(),
+                new FriendEvent("FRIEND_REJECTED", receiver.getUsername(), null)
+        );
+
+        notificationService.sendNotification(
+                receiver.getUsername(),
+                new FriendEvent("FRIEND_REJECTED", sender.getUsername(), null)
+        );
     }
 
     public FriendState getFriendState(User currentUser, User profileUser) {

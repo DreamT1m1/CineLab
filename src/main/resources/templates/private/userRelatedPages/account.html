@@ -19,25 +19,25 @@
                 <div id="avatar_related">
                     <img th:if="${user.avatar == null}" th:src="@{/img/empty_profile.jpg}" alt="" class="main_avatar">
                     <img th:if="${user.avatar != null}" th:src="@{'/avatars/' + ${user.getAvatar()}}" alt="user_avatar" class="main_avatar">
-                    <div th:if="${!isCorrectUser && authenticated}" id="friend-controls">
-                        <div th:switch="${friendState}">
-                            <button th:case="'NONE'" id="add-friend-button" th:data-username="${user.getUsername()}">
-                                Send friend request
-                            </button>
+                        <div th:if="${!isCorrectUser && authenticated}" id="friend-controls">
+                            <div th:switch="${friendState}">
+                                <button th:case="'NONE'" id="add-friend-button" th:data-username="${user.getUsername()}">
+                                    Send friend request
+                                </button>
 
-                            <button th:case="'REQUEST_SENT'" disabled>
-                                Request sent
-                            </button>
+                                <button th:case="'REQUEST_SENT'" disabled>
+                                    Request sent
+                                </button>
 
-                            <div th:case="'REQUEST_RECEIVED'">
-                                <button id="accept-friend-button" th:data-id="${invite.getId()}" th:data-invite-id="${invite.getId()}">Accept</button>
-                                <button id="reject-friend-button" th:data-id="${invite.getId()}" th:data-invite-id="${invite.getId()}">Reject</button>
+                                <div th:case="'REQUEST_RECEIVED'">
+                                    <button id="accept-friend-button" th:data-id="${invite.getId()}">Accept</button>
+                                    <button id="reject-friend-button" th:data-id="${invite.getId()}">Reject</button>
+                                </div>
+
+                                <button th:case="'FRIENDS'" disabled>
+                                    Friends
+                                </button>
                             </div>
-
-                            <button th:case="'FRIENDS'" disabled>
-                                Friends
-                            </button>
-                        </div>
                     </div>
                     <form th:if="${isCorrectUser}" id="avatar_form" action="/set_avatar" method="post" enctype="multipart/form-data">
                         <input type="file" id="avatar_input" name="avatar" accept="image/*" onchange="document.getElementById('avatar_form').submit()">
@@ -79,9 +79,6 @@
         </div>
     </main>
     <script th:src="@{/scripts/addRatingForMoviesInProfile.js}"></script>
-    <script th:src="@{/scripts/addFriend.js}"></script>
-    <script th:src="@{/scripts/acceptFriend.js}"></script>
-    <script th:src="@{/scripts/rejectFriend.js}"></script>
     <div th:replace="general/websocketscripts :: websocketscripts"></div>
 </body>
 </html>

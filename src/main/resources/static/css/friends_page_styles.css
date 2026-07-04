@@ -1,0 +1,21 @@
+#main {
+    padding-top: 50px;
+}
+
+.friend-username {
+    margin-right: 10px;
+}
+
+.friend-link {
+    display: flex;
+    width: fit-content;
+    align-items: flex-end;
+}
+
+.friend-avatar {
+    width: 50px;
+}
+
+.friend:not(:last-child) {
+    margin-bottom: 30px;
+}

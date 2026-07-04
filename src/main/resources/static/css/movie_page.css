@@ -18,16 +18,17 @@
     margin-bottom: 10px;
 }
 
-#secondary-info span:not(:last-child) {
-    margin-bottom: 5px;
-}
-
 #release-date {
     display: block;
 }
 
 #runtime {
     display: block;
+    margin-bottom: 20px;
+}
+
+#overview {
+    margin-bottom: 20px;
 }
 
 #media {
