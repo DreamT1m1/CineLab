@@ -22,7 +22,6 @@
             <a th:href="@{/{username}(username=${#authentication.principal.user.username})}">
                 <span th:text="${#authentication.principal.user.username}"></span>
             </a>
-            <br>
             <a th:href="@{/logout}">
                 <span>Log out</span>
             </a>
@@ -41,12 +40,11 @@
                 <img th:src="@{/img/friend_icon.png}" alt="friend_ico" class="friend_related_icons">
             </a>
         </div>
-        <div sec:authorize="isAnonymous()" class="auth_auth">
+        <div sec:authorize="isAnonymous()" id="auth_auth">
             <a th:href="@{/login}">
                 Log In
             </a>
-            <br>
-            <a th:href="@{/register}" class="auth_auth">
+            <a th:href="@{/register}">
                 Register
             </a>
         </div>

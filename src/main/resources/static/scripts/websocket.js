@@ -34,6 +34,8 @@ function showNotification(event) {
         div.innerText = `${event.userName} sent you a friend request`;
     } else if (event.type === "FRIEND_ACCEPTED") {
         div.innerText = `You're now friends with ${event.userName}`;
+    } else if (event.type === "FRIEND_REJECTED") {
+        return;
     }
 
     container.appendChild(div);

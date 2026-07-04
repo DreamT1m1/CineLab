@@ -10,4 +10,8 @@ function handleFriendEvent(event) {
     if (event.type === "FRIEND_ACCEPTED") {
         renderFriendControls("FRIENDS", event.inviteId);
     }
+
+    if (event.type === "FRIEND_REJECTED") {
+        renderFriendControls("REJECTED", event.inviteId);
+    }
 }

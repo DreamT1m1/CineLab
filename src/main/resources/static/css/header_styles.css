@@ -63,6 +63,20 @@
     background-color: #950740;
 }
 
+#auth_auth {
+    justify-items: center;
+    align-content: center;
+}
+
+#auth_auth > a {
+    display: block;
+    transition: 0.2s;
+}
+
+#auth_auth > a:hover {
+    transform: scale(1.1);
+}
+
 .header_avatar {
     height: 100%;
     margin-left: 20px;
@@ -70,6 +84,16 @@
 
 #principals {
     align-content: center;
+}
+
+#principals > a {
+    display: block;
+    transition: 0.2s;
+    width: fit-content;
+}
+
+#principals > a:hover {
+    transform: scale(1.1);
 }
 
 .friends_buttons {

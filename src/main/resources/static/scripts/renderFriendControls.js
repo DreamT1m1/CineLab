@@ -5,7 +5,7 @@ function renderFriendControls(state, inviteId) {
 
     const username = document.getElementById("user_info")?.dataset.username;
 
-    if (state === "NONE") {
+    if (state === "NONE" || state === "REJECTED") {
         el.innerHTML = `
             <button id="add-friend-button" data-username="${username}">
                 Send friend request

@@ -80,8 +80,6 @@ public class FriendService {
 
     @Transactional
     public void rejectInvite(Long inviteId) {
-        friendInviteRepository.delete(friendInviteRepository.findById(inviteId).orElseThrow());
-
         FriendInvite invite = friendInviteRepository.findById(inviteId).orElseThrow();
 
         User sender = invite.getSender();
@@ -96,6 +94,8 @@ public class FriendService {
                 receiver.getUsername(),
                 new FriendEvent("FRIEND_REJECTED", sender.getUsername(), null)
         );
+
+        friendInviteRepository.delete(friendInviteRepository.findById(inviteId).orElseThrow());
     }
 
     public FriendState getFriendState(User currentUser, User profileUser) {

@@ -82,4 +82,11 @@ public class FriendController {
     public void rejectInvite(@PathVariable Long id) {
         friendService.rejectInvite(id);
     }
+
+    @PostMapping("/{username}/remove_friend/{id}")
+    @ResponseBody
+    public void removeFriend(@PathVariable(name = "username") String userName,
+                             @PathVariable(name = "id") int friendId) {
+
+    }
 }
