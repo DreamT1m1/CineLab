@@ -3,6 +3,7 @@ package com.timo.Cinelab.Cinelab.services;
 import com.timo.Cinelab.Cinelab.models.User.User;
 import com.timo.Cinelab.Cinelab.models.chat.Conversation;
 import com.timo.Cinelab.Cinelab.models.chat.Message;
+import com.timo.Cinelab.Cinelab.models.chat.MessageResponse;
 import com.timo.Cinelab.Cinelab.models.chat.SendMessage;
 import com.timo.Cinelab.Cinelab.repository.ConversationRepository;
 import com.timo.Cinelab.Cinelab.repository.FriendRelationRepository;
@@ -10,6 +11,7 @@ import com.timo.Cinelab.Cinelab.repository.MessageRepository;
 import com.timo.Cinelab.Cinelab.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class ChatService {
@@ -25,6 +27,26 @@ public class ChatService {
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
         this.friendRelationRepository = friendRelationRepository;
+    }
+
+    public List<Conversation> getAllUserConversations(User user) {
+        return conversationRepository.findAllUserChats(user);
+    }
+
+    public List<MessageResponse> getMessages(Long user1Id, Long user2Id) {
+        User user1 = userRepository.findUserById(user1Id)
+                .orElseThrow();
+
+        User user2 = userRepository.findUserById(user2Id)
+                .orElseThrow();
+
+        Conversation conversation =
+                getOrCreateConversation(user1, user2);
+
+        return messageRepository.findConversationMessages(conversation)
+                .stream()
+                .map(m -> new MessageResponse(m.getSender().getId(), m.getText()))
+                .toList();
     }
 
     private Conversation getOrCreateConversation(User user1, User user2) {

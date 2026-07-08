@@ -2,11 +2,13 @@ package com.timo.Cinelab.Cinelab.models.chat;
 
 import com.timo.Cinelab.Cinelab.models.User.User;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "messages")
+@Getter
 public class Message {
 
     @Id

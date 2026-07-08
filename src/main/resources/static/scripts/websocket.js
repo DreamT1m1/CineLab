@@ -20,6 +20,8 @@ const client = new StompJs.Client({
 
             showMessage(data);
         })
+
+        loadMessages();
     }
 });
 
@@ -57,15 +59,21 @@ function showNotification(event) {
 function sendMessage() {
 
     const messageInput = document.getElementById("messageInput");
+    let text = messageInput.value;
 
     let message = {
-        receiverId: messageInput.dataset.receiverId,
-        text: messageInput.value
+        receiverId: receiverId,
+        text: text
     };
 
     client.publish({
         destination: "/app/chat.send",
         body: JSON.stringify(message)
+    });
+
+    showMessage({
+        text: messageInput.value,
+        senderId: messageInput.dataset.currentUserId
     });
 
     messageInput.value = "";
@@ -77,4 +85,22 @@ function showMessage(message) {
     div.textContent = message.text;
 
     document.getElementById("messages").appendChild(div);
+}
+
+function loadMessages() {
+
+    if (!receiverId) {
+        return;
+    }
+
+    fetch(`/chat/${receiverId}/messages`)
+        .then(response => response.json())
+        .then(messages => {
+            messages.forEach(message => {
+                showMessage(message);
+            });
+        })
+        .catch(error => {
+            console.error("Failed to load messages: ", error);
+        });
 }
