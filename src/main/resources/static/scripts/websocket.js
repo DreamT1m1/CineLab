@@ -71,19 +71,26 @@ function sendMessage() {
         body: JSON.stringify(message)
     });
 
-    showMessage({
-        text: messageInput.value,
-        senderId: messageInput.dataset.currentUserId
-    });
-
     messageInput.value = "";
 }
 
 function showMessage(message) {
     let div = document.createElement("div");
+    div.className = "message";
 
-    div.textContent = message.text;
+    let messageText = document.createElement("div");
+    messageText.className = "message-text";
+    messageText.textContent = message.text;
+    div.appendChild(messageText);
 
+    let date = document.createElement("div");
+    date.className = "message-sent-at";
+
+    let sentAt = new Date(message.sentAt);
+
+    date.textContent = `${String(sentAt.getHours()).padStart(2, "0")}:${String(sentAt.getMinutes()).padStart(2, "0")}`
+
+    div.appendChild(date);
     document.getElementById("messages").appendChild(div);
 }
 
