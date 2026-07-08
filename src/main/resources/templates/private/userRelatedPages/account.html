@@ -19,8 +19,11 @@
                 <div id="avatar_related">
                     <img th:if="${user.avatar == null}" th:src="@{/img/empty_profile.jpg}" alt="" class="main_avatar">
                     <img th:if="${user.avatar != null}" th:src="@{'/avatars/' + ${user.getAvatar()}}" alt="user_avatar" class="main_avatar">
-                        <div th:if="${!isCorrectUser && authenticated}" id="friend-controls" th:data-profile-id="${user.getId()}" th:data-current-user-id="${#authentication.principal.user.getId()}">
-                            <div th:switch="${friendState}">
+                        <div th:if="${!isCorrectUser && authenticated}"
+                             id="friend-controls"
+                             th:data-profile-id="${user.getId()}"
+                             th:data-current-user-id="${#authentication.principal.user.getId()}"
+                             th:switch="${friendState}">
                                 <button th:case="'NONE'" id="add-friend-button" th:data-username="${user.getUsername()}">
                                     Send friend request
                                 </button>
@@ -34,15 +37,19 @@
                                     <button id="reject-friend-button" th:data-id="${invite.getId()}">Reject</button>
                                 </div>
 
-                                <div th:case="'FRIENDS'">
+                                <div th:case="'FRIENDS'" id="is-friends">
                                     <button disabled>
                                         Friends
                                     </button>
                                     <button id="delete-friend-button" th:data-profile-id="${user.getId()}" th:data-current-user-id="${#authentication.principal.user.getId()}">
                                         Delete friend
                                     </button>
+                                    <div id="is-friends-buttons">
+                                        <a th:href="@{/chat/{receiverId}(receiverId=${user.getId()})}" id="send-message-link">
+                                            <img src="/img/send_message.png" alt="send_message" id="send-message-icon">
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                     </div>
                     <form th:if="${isCorrectUser}" id="avatar_form" action="/set_avatar" method="post" enctype="multipart/form-data">
                         <input type="file" id="avatar_input" name="avatar" accept="image/*" onchange="document.getElementById('avatar_form').submit()">

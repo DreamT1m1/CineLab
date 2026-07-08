@@ -14,6 +14,12 @@ const client = new StompJs.Client({
 
         });
 
+        client.subscribe("/user/queue/messages", function (message) {
+
+            const data = JSON.parse(message.body);
+
+            showMessage(data);
+        })
     }
 });
 
@@ -46,4 +52,29 @@ function showNotification(event) {
         div.remove();
     }, 7000);
 
+}
+
+function sendMessage() {
+
+    const messageInput = document.getElementById("messageInput");
+
+    let message = {
+        receiverId: messageInput.dataset.receiverId,
+        text: messageInput.value
+    };
+
+    client.publish({
+        destination: "/app/chat.send",
+        body: JSON.stringify(message)
+    });
+
+    messageInput.value = "";
+}
+
+function showMessage(message) {
+    let div = document.createElement("div");
+
+    div.textContent = message.text;
+
+    document.getElementById("messages").appendChild(div);
 }
