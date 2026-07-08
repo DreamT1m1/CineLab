@@ -32,11 +32,11 @@
 
                 </div>
                 <div id="message-input-bar">
-                    <input th:if="${receiver != null}"
-                           type="text"
+                    <input type="text"
                            id="messageInput"
+                           th:data-receiver-id="${receiver != null ? receiver.id : ''}"
                            th:data-current-user-id="${#authentication.principal.user.getId()}">
-                    <button th:if="${receiver != null}" onClick="sendMessage()" id="send-button">Send</button>
+                    <button onClick="sendMessage()" id="send-button">Send</button>
                 </div>
             </section>
         </div>

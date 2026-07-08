@@ -1,7 +1,6 @@
 package com.timo.Cinelab.Cinelab.controllers;
 
 import com.timo.Cinelab.Cinelab.models.User.CustomUserDetails;
-import com.timo.Cinelab.Cinelab.models.User.User;
 import com.timo.Cinelab.Cinelab.services.ChatService;
 import com.timo.Cinelab.Cinelab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
