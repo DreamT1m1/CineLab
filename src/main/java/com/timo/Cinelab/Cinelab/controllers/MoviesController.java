@@ -25,15 +25,16 @@ public class MoviesController {
     }
 
     @GetMapping
-    public String getMoviesPage(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                               @RequestParam(value = "title", required = false) String title,
-                               Model model) {
-        if (page != null) {
-            model.addAttribute("moviesList", moviesService.getMoviePage(page));
-        }
-        if (title != null) {
-            model.addAttribute("moviesList", moviesService.getMoviesByTitle(title));
-        }
+    public String getMoviesByTitleSearch(@RequestParam(value = "title", required = false) String title,
+                                         Model model) {
+        model.addAttribute("moviesList", moviesService.getMoviesByTitle(title));
+        return "public/movies/movies_page";
+    }
+
+    @GetMapping("/popular-movies/{page}")
+    public String getPopularMoviesPage(@PathVariable int page,
+                                       Model model) {
+        model.addAttribute("moviesList", moviesService.getPopularMoviesPage(page));
         return "public/movies/movies_page";
     }
 
@@ -50,4 +51,11 @@ public class MoviesController {
         return "public/movies/movie_page";
     }
 
+    @GetMapping("/top-rated/{page}")
+    public String getTopRatedMoviesPage(@PathVariable int page,
+                                        Model model) {
+
+        model.addAttribute("moviesList", moviesService.getTopRatedMoviesPage(page));
+        return "public/movies/movies_page";
+    }
 }

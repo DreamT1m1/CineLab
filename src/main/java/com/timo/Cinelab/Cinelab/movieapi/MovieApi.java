@@ -27,6 +27,7 @@ public class MovieApi {
     private static final String MOVIES_BY_TITLE_URL = "https://api.themoviedb.org/3/search/movie?api_key=YOUR_API_KEY&query=";
     private static final String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular";
     private static final String MOVIE_BY_ID_URL = "https://api.themoviedb.org/3/movie/";
+    private static final String TOP_RATED_MOVIES = "https://api.themoviedb.org/3/movie/top_rated?page=";
 
     private static String getMovieCreditsUrlById(Long id) {
         return String.format("https://api.themoviedb.org/3/movie/%d/credits", id);
@@ -47,7 +48,7 @@ public class MovieApi {
         return httpHeaders;
     }
 
-    public List<Movie> getMoviePage(int page) {
+    public List<Movie> getPopularMoviesPage(int page) {
         try {
             String finalUrl = MOVIES_PAGE_URL + page;
 
@@ -125,6 +126,27 @@ public class MovieApi {
             return List.of();
         }
 
+    }
+
+    public List<Movie> getTopRatedMovies(int page) {
+        try {
+            HttpEntity<String> httpEntity = new HttpEntity<>(getHttpHeaders());
+
+            String response = restTemplate.exchange(
+                    TOP_RATED_MOVIES + page,
+                    HttpMethod.GET,
+                    httpEntity,
+                    String.class
+            ).getBody();
+
+            return objectMapper.convertValue(
+                    objectMapper.readTree(response).get("results"),
+                    new TypeReference<>() {}
+            );
+        } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
+            return List.of();
+        }
     }
 
     public MovieLarge getMovieLargeById(long id) {

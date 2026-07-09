@@ -22,8 +22,12 @@ public class MoviesService {
         this.movieApi = movieApi;
     }
 
-    public List<Movie> getMoviePage(int page) {
-        return movieApi.getMoviePage(page);
+    public List<Movie> getPopularMoviesPage(int page) {
+        return movieApi.getPopularMoviesPage(page);
+    }
+
+    public List<Movie> getTopRatedMoviesPage(int page) {
+        return movieApi.getTopRatedMovies(page);
     }
 
     public List<Movie> getMoviesByTitle(String title) {

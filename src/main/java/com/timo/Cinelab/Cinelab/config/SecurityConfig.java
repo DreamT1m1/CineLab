@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .permitAll()
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/movies", true)
+                        .defaultSuccessUrl("/movies/popular-movies/1", true)
                 )
                 // Logging out
                 .logout(logout -> logout
