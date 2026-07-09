@@ -75,8 +75,18 @@ function sendMessage() {
 }
 
 function showMessage(message) {
+
+    const messages = document.getElementById("messages");
+    const currentUserId = messages.dataset.currentUserId;
+
     let div = document.createElement("div");
     div.className = "message";
+
+    if (currentUserId == message.senderId) {
+        div.classList.add("right-message");
+    } else {
+        div.classList.add("left-message");
+    }
 
     let messageText = document.createElement("div");
     messageText.className = "message-text";
@@ -91,7 +101,9 @@ function showMessage(message) {
     date.textContent = `${String(sentAt.getHours()).padStart(2, "0")}:${String(sentAt.getMinutes()).padStart(2, "0")}`
 
     div.appendChild(date);
-    document.getElementById("messages").appendChild(div);
+    messages.appendChild(div);
+
+    messages.scrollTop = messages.scrollHeight;
 }
 
 function loadMessages() {

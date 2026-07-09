@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 
 @Controller
 public class ChatWebSocketController {
@@ -40,7 +41,7 @@ public class ChatWebSocketController {
         User receiver = userService.getUserById(message.getReceiverId());
 
         Message savedMessage = chatService.sendMessage(sender.getId(), message);
-        MessageResponse response = new MessageResponse(sender.getId(), message.getText());
+        MessageResponse response = new MessageResponse(sender.getId(), message.getText(), LocalDateTime.now());
 
         messagingTemplate.convertAndSendToUser(
                 receiver.getUsername(),

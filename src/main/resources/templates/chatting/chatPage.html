@@ -28,7 +28,7 @@
             </aside>
 
             <section id="chat-window">
-                <div id="messages">
+                <div id="messages" th:data-current-user-id="${#authentication.principal.user.getId()}">
 
                 </div>
                 <div id="message-input-bar">

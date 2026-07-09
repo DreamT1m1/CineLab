@@ -45,7 +45,7 @@ public class ChatService {
 
         return messageRepository.findConversationMessages(conversation)
                 .stream()
-                .map(m -> new MessageResponse(m.getSender().getId(), m.getText()))
+                .map(m -> new MessageResponse(m.getSender().getId(), m.getText(), m.getSentAt()))
                 .toList();
     }
 

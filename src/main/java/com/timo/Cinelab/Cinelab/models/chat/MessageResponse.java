@@ -9,10 +9,11 @@ public class MessageResponse {
 
     private Long senderId;
     private String text;
-    private LocalDateTime sentAt = LocalDateTime.now();
+    private LocalDateTime sentAt;
 
-    public MessageResponse(Long senderId, String text) {
+    public MessageResponse(Long senderId, String text, LocalDateTime sentAt) {
         this.senderId = senderId;
         this.text = text;
+        this.sentAt = sentAt;
     }
 }
