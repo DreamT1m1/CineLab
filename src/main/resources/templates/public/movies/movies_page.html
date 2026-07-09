@@ -13,6 +13,22 @@
 </head>
 <body id="body">
     <div th:replace="general/header :: header"></div>
+    <div id="sub-header">
+        <ul id="sub-header-menu">
+            <li id="sub-header-menu-movies" class="sub-header-menu-element">
+                <a href="" class="sub-header-menu-element-link">
+                    Movies
+                </a>
+            </li>
+        </ul>
+        <div id="sub-header-menu-sub-movies" class="sub-header-menu-sub hidden">
+            <a href="" class="sub-header-menu-sub-link">
+                <div class="sub-header-menu-sub-link-text">
+                    Top rated movies
+                </div>
+            </a>
+        </div>
+    </div>
     <main id="main">
         <div class="container">
             <ul class="movies-list">
@@ -29,6 +45,7 @@
         </div>
     </main>
     <script th:src="@{/scripts/justifyTitleScript.js}"></script>
+    <script th:src="@{/scripts/toggleSubHeaderMenus.js}"></script>
     <div th:replace="general/websocketscripts :: websocketscripts"></div>
 </body>
 </html>
