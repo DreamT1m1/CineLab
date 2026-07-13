@@ -1,3 +1,14 @@
+#main {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.container {
+    justify-items: center;
+    padding: 50px;
+    height: fit-content;
+}
+
 .form_container_input:focus {
     outline: none;
 }
